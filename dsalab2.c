@@ -79,6 +79,44 @@ void insertBetween(int x, int p)
         newnode->last=temp;
     }
 }
+void deleteFront()
+{
+    if(head==NULL)
+    {
+        printf("list empty");
+    }
+    else
+    {
+        struct node *temp;
+        temp=head;
+        head=head->next;
+        head->last=NULL;
+        printf("%d is deleted\n",temp->data);
+        free(temp);
+    }
+}
+void deleteEnd()
+{
+    if(head==NULL)
+    {
+        printf("List is empty");
+    }
+    else
+    {
+        struct node *temp1;
+        struct node *temp2;
+        temp1=head;
+        temp2=head->next;
+        while(temp2->next!=NULL)
+        {
+            temp1=temp1->next;
+            temp2=temp2->next;
+        }
+        temp1->next=NULL;
+        printf("%d is deleted",temp2->data);
+        free(temp2);
+    }
+}
 int main()
 {
     int x=0,y=0,z=0,m=0;
@@ -107,6 +145,14 @@ int main()
             printf("Enter element after which new node is to be added:");
             scanf("%d",&m);
             insertBetween(y,m);
+        }
+        else if(z==4)
+        {
+            deleteFront();
+        }
+        else if(z==5)
+        {
+            deleteEnd();
         }
         else
         {
