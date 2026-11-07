@@ -1,6 +1,8 @@
 
 Log in
 Sign up for free
+Log in
+Sign up for free
 DSA_Lab_Index_Final_Bold-JPG-1024.jpg
 hi, so i'm a second year S3 B.Tech Computer Science and Business Systems student at Govt Model Engineering College Thrikakarra under KTU 2024 scheme. i have Data Structures Lab  external lab exam next week, and i am going to start preparing for it from today onwards. i have a basic understanding of datastructures and am moderately thorough with the main concepts. And i am now trying to do all the lab experiments i did in lab sessions myself, and trying to prepare for the lab exam as best as possible, and i need you help to do it. i first want to tackle all the sorting techniques as they were taught first in the course but i just want to get them out of the way so that i can tackle the other topics better. so, i will upload the total list of all the programs we have done in our lab so far, this list is the index of our fair record as well. the sorting techniques we also studied are insertion sort, selection sort, bubble sort, merge sort, quick sort, heap sort, radix sort. but first can you make me a quiz and analyse my results and find out what sort of preparation level i am already at due to the internal lab exams and lab sessions experience and knowledge?
 
@@ -129,13 +131,6 @@ We'll eventually do a timed mock practical exam as well.
 For now, just attempt the 10 questions honestly. Don't worry about your score. I want an accurate picture of where you're starting, so that we can spend your preparation time fixing actual weaknesses instead of revising things you already know.
 
 
-Upload files and ask questions
-Log in to upload a file and get help with it.
-
-
-Log in
-
-Sign up for free
 i can't access the quiz. sorry, and also i want you to make the quiz to accomadate the entire syllabus not just the seven sorting techinques
 
 No need to apologise! And actually, I agree with your second point. We shouldn't assess just sorting when your ultimate goal is to prepare for the entire Data Structures Lab external examination.
@@ -1999,6 +1994,1280 @@ Make sure your program handles all four correctly.
 My observation: You're learning the algorithm rather than blindly memorising it. That's exactly what I want. Once you can independently write insertion sort without these mistakes, we'll move to selection sort, where we'll practise the difference between selecting a minimum and shifting elements.
 
 
+ok, so that ones done. now next
+
+Great! Insertion sort is done. Let's move on to Selection Sort.
+
+Experiment 02 – Selection Sort
+Sorting
+techniques
+ 
+Next
+experiment
+
+1. Understand the algorithm
+Selection sort works by repeatedly finding the smallest element in the unsorted portion of the array and placing it at the beginning of that portion.
+
+The key difference from insertion sort:
+
+Insertion sort: Takes an element and inserts it into its correct position.
+
+Selection sort: Finds the minimum element and swaps it into its correct position.
+
+
+Learn more
+2. Algorithm
+Suppose we have:
+
+[64, 25, 12, 22, 11]
+
+Pass
+
+Minimum found
+
+Array after swapping
+
+1
+
+11
+
+11, 25, 12, 22, 64
+
+2
+
+12
+
+11, 12, 25, 22, 64
+
+3
+
+22
+
+11, 12, 22, 25, 64
+
+4
+
+25
+
+11, 12, 22, 25, 64
+
+Notice that after every pass, one more element reaches its final sorted position.
+
+3. Pseudocode
+
+text
+START
+
+Read n
+Read array elements
+
+FOR i = 0 to n-2
+    min = i
+
+    FOR j = i+1 to n-1
+        IF arr[j] < arr[min]
+            min = j
+        END IF
+    END FOR
+
+    IF min != i
+        Swap arr[i] and arr[min]
+    END IF
+
+END FOR
+
+Display sorted array
+
+STOP
+4. Important points for your external exam
+Property
+
+Selection sort
+
+Best-case time
+
+O(n²)
+
+Average-case time
+
+O(n²)
+
+Worst-case time
+
+O(n²)
+
+Auxiliary space
+
+O(1)
+
+In-place
+
+Yes
+
+Stable
+
+No, in standard swap-based implementation
+
+Comparisons
+
+n(n−1)/2
+
+Swaps
+
+At most n−1
+
+Viva point: Unlike insertion sort, selection sort performs O(n²) comparisons even if the array is already sorted.
+
+5. Your practical exercise
+Now it's your turn.
+
+Write a complete C program to implement Selection Sort in ascending order.
+
+Requirements:
+
+Read the number of elements.
+
+Read the array elements.
+
+Implement selection sort.
+
+Display the array after every pass.
+
+Display the final sorted array.
+
+A few hints:
+
+Use two loops.
+
+Maintain a variable called min.
+
+Don't swap immediately whenever you find a smaller element.
+
+Complete the inner loop first, then perform the swap.
+
+Important: Try writing it independently, just as you did with insertion sort. Don't copy the pseudocode line by line into C without understanding what each statement does.
+
+Once you send your code, I'll review it, test its logic against edge cases and prepare you for the selection-sort viva.
+
+
+#include <stdio.h>
+int main()
+{
+    int n=0, i=0, j=0, min=0,key=0,temp=0;
+    printf("Enter no of elements: ");
+    scanf("%d",&n);
+    int arr[n];
+    for(i=0;i<n;i++)
+    {
+        printf("Enter element: ");
+        scanf("%d",&arr[i]);
+    }
+    printf("\n");
+    for(i=0;i<n;i++)
+    {
+        key=arr[i];
+        min=i;
+        for(j=i+1;j<n;j++)
+        {
+            if(arr[j]<arr[min])
+            {
+                min=j;
+            }
+        }
+        temp=arr[min];
+        arr[min]=arr[j];
+        arr[j]=temp;
+        printf("Pass %d:",i+1);
+        for(j=0;j<n;j++)
+        {
+            printf("%d, ",arr[j]);
+        }
+        printf("\n");
+    }
+    return 0;
+}
+
+what's wrong?
+
+You're very close again! Your minimum-finding logic is actually completely correct. The mistake is in the swapping section, along with one minor loop-boundary issue.
+
+Let's go through it.
+
+1. Main mistake – Incorrect swapping
+You wrote:
+
+
+c
+temp=arr[min];
+arr[min]=arr[j];
+arr[j]=temp;
+The problem is that j is no longer the index of the minimum element.
+
+Look at your inner loop:
+
+
+c
+for(j=i+1;j<n;j++)
+{
+    if(arr[j]<arr[min])
+    {
+        min=j;
+    }
+}
+When this loop finishes, j becomes n.
+
+Remember how a for loop works: after the final iteration, the increment happens before the condition is checked again.
+
+Therefore, you're effectively trying to access:
+
+
+c
+arr[n]
+This is outside the valid array indices (0 to n-1).
+
+The correction:
+
+You already have the index of the minimum element stored in min!
+
+So your swapping should be:
+
+
+c
+temp = arr[min];
+arr[min] = arr[i];
+arr[i] = temp;
+Why i? Because i represents the position where the minimum element needs to be placed.
+
+2. Minor improvement – Outer loop condition
+You wrote:
+
+
+c
+for(i=0;i<n;i++)
+It should be:
+
+
+c
+for(i=0;i<n-1;i++)
+Why?
+
+Once you've placed the first n-1 elements in their correct positions, the last element is automatically sorted.
+
+There is no need for another pass.
+
+3. One unnecessary variable
+You declared:
+
+
+c
+key=arr[i];
+But you never use key anywhere else.
+
+You can safely remove key from your variable declaration and assignment.
+
+Unlike insertion sort, selection sort doesn't need to preserve the element being inserted in a separate variable.
+
+4. Your corrected program
+I've retained your coding style and pass-by-pass display.
+
+
+c
+
+#include <stdio.h>
+
+int main()
+{
+    int n=0, i=0, j=0, min=0, temp=0;
+
+    printf("Enter no of elements: ");
+    scanf("%d",&n);
+
+    if(n<=0)
+    {
+        printf("Invalid array size");
+        return 0;
+    }
+
+    int arr[n];
+
+    for(i=0;i<n;i++)
+    {
+        printf("Enter element: ");
+        scanf("%d",&arr[i]);
+    }
+
+    printf("\n");
+
+    for(i=0;i<n-1;i++)
+    {
+        min=i;
+
+        for(j=i+1;j<n;j++)
+        {
+            if(arr[j]<arr[min])
+            {
+                min=j;
+            }
+        }
+
+        temp=arr[min];
+        arr[min]=arr[i];
+        arr[i]=temp;
+
+        printf("Pass %d: ",i+1);
+
+        for(j=0;j<n;j++)
+        {
+            printf("%d, ",arr[j]);
+        }
+
+        printf("\n");
+    }
+
+    printf("Sorted array: ");
+
+    for(i=0;i<n;i++)
+    {
+        printf("%d ",arr[i]);
+    }
+
+    return 0;
+}
+5. Important viva questions
+These are particularly relevant to selection sort.
+
+Q1. Why do we initialise min = i at the beginning of every pass?
+
+Because we initially assume the first element of the unsorted portion is the minimum.
+
+Q2. Why does the inner loop start at j = i + 1?
+
+Because the element at index i is already our current minimum candidate. We only need to examine the remaining unsorted elements.
+
+Q3. Why is selection sort not stable in its standard implementation?
+
+Because swapping distant elements can change the relative order of elements having equal values.
+
+Q4. How many comparisons does selection sort perform for 6 elements?
+
+6
+(
+6
+−
+1
+)
+2
+=
+15
+2
+6(6−1)
+​
+ =15
+Q5. Does selection sort perform fewer comparisons if the array is already sorted?
+
+No. It still performs the same number of comparisons.
+
+6. My assessment of your selection sort attempt
+Component
+
+Assessment
+
+Input handling
+
+Good
+
+Outer loop
+
+Good logic; one unnecessary pass
+
+Minimum initialisation
+
+Correct
+
+Minimum identification
+
+Correct
+
+Swapping
+
+Incorrect index
+
+Pass display
+
+Good
+
+Conceptual understanding: Good
+I noticed something encouraging: your mistakes are increasingly about small implementation details rather than misunderstanding the algorithms.
+
+That's progress.
+
+7. Before moving to bubble sort
+One quick question:
+
+Suppose the array is:
+
+[1, 2, 3, 4, 5]
+
+In selection sort:
+
+How many comparisons will be performed?
+
+How many actual swaps are necessary if you use if(min != i) before swapping?
+
+What will the array look like after the first pass?
+
+Answer these three, and we'll move on to Bubble Sort.
+
+
+#include <stdio.h>
+int main()
+{
+    int n=0, i=0, j=0, min=0,key=0,temp=0;
+    printf("Enter no of elements: ");
+    scanf("%d",&n);
+    int arr[n];
+    for(i=0;i<n;i++)
+    {
+        printf("Enter element: ");
+        scanf("%d",&arr[i]);
+    }
+    printf("\n");
+    for(i=0;i<n;i++)
+    {
+        key=arr[i];
+        min=i;
+        for(j=i+1;j<n;j++)
+        {
+            if(arr[j]<key)
+            {
+                min=j;
+            }
+        }
+        temp=arr[min];
+        arr[min]=arr[i];
+        arr[i]=temp;
+        printf("Pass %d:",i+1);
+        for(j=0;j<n;j++)
+        {
+            printf("%d, ",arr[j]);
+        }
+        printf("\n");
+    }
+    return 0;
+}
+
+this is not giving the correct output. why?
+
+I spotted the problem! You've made a small but important change that has introduced a logical error.
+
+The issue is here:
+
+
+c
+key = arr[i];
+
+for(j=i+1;j<n;j++)
+{
+    if(arr[j]<key)
+    {
+        min=j;
+    }
+}
+You're comparing every element against key, which is the element at the beginning of the current unsorted portion.
+
+But you're not updating key when you find a smaller element.
+
+1. Let's understand with an example
+Consider:
+
+
+text
+[8, 5, 3, 6, 2]
+At the beginning of the first pass:
+
+
+c
+key = 8;
+min = 0;
+Now the inner loop executes:
+
+j
+
+arr[j]
+
+Comparison
+
+min
+
+1
+
+5
+
+5 < 8
+
+1
+
+2
+
+3
+
+3 < 8
+
+2
+
+3
+
+6
+
+6 < 8
+
+3
+
+4
+
+2
+
+2 < 8
+
+4
+
+Notice what happened?
+
+Even though 2 was the smallest element, your program would also update min when it encounters 6, because 6 is smaller than the original key (8).
+
+In this particular example, the final minimum happens to be correct. But consider:
+
+
+text
+[8, 5, 6, 7]
+Your program would update min successively to indices 1, 2 and 3, eventually selecting 7 instead of 5!
+
+2. The correction
+You have two ways to fix this.
+
+Method 1 – Compare with arr[min] (recommended)
+
+
+c
+if(arr[j] < arr[min])
+{
+    min = j;
+}
+This is the standard selection sort approach.
+
+Method 2 – Update key whenever minimum changes
+
+
+c
+if(arr[j] < key)
+{
+    key = arr[j];
+    min = j;
+}
+Both work, but Method 1 is cleaner because min already stores the index of the smallest element found so far.
+
+3. One more small improvement
+Change:
+
+
+c
+for(i=0;i<n;i++)
+to:
+
+
+c
+for(i=0;i<n-1;i++)
+And you can remove key entirely.
+
+4. Remember this distinction
+This is particularly important for your lab exam:
+
+Algorithm
+
+What you track
+
+Insertion sort
+
+The key being inserted
+
+Selection sort
+
+The index min of the smallest element
+
+Don't confuse these two approaches!
+
+5. Quick understanding check
+Consider this array:
+
+[12, 7, 9, 4, 6]
+
+During the first pass of selection sort:
+
+What will min be after comparing 7?
+
+What will min be after comparing 9?
+
+What will min be after comparing 4?
+
+What will min be after comparing 6?
+
+Give me the four index values.
+
+Once you've got this, I think we can confidently mark selection sort as completed and move to bubble sort!
+
+
+1.1
+2.1
+3.1
+4.3
+
+Good attempt! You've got the first two right, but the last two need correction.
+
+Let's trace it carefully.
+
+Initial array:
+
+[12, 7, 9, 4, 6]
+
+Remember: min stores the index of the smallest element found so far, not the index of the most recently encountered smaller element.
+
+Comparison
+
+Condition
+
+min
+
+Start
+
+Assume 12 is minimum
+
+0
+
+7 < 12
+
+Yes
+
+1
+
+9 < 7
+
+No
+
+1
+
+4 < 7
+
+Yes
+
+3
+
+6 < 4
+
+No
+
+3
+
+Correct answer: 0, 1, 1, 3, 3
+Your answers:
+
+Q1: 1 
+Correct
+
+Q2: 1 
+Correct
+
+Q3: 1 
+Incorrect
+
+Q4: 3 
+Correct
+
+You missed one important detail: when you encounter 4, it is smaller than the current minimum, 7, so min must become 3.
+
+Selection sort – Completed
+You now understand the essential distinction between the key in insertion sort and the min index in selection sort.
+
+Let's move on!
+
+Experiment 03 – Bubble Sort
+Sorting techniques
+1. How bubble sort works
+Bubble sort repeatedly compares adjacent elements and swaps them if they are in the wrong order.
+
+For ascending order, the larger element moves towards the right during each pass.
+
+
+Learn more
+2. Example
+Consider:
+
+[5, 1, 4, 2, 8]
+
+Pass
+
+Array after pass
+
+Initial
+
+5, 1, 4, 2, 8
+
+1
+
+1, 4, 2, 5, 8
+
+2
+
+1, 2, 4, 5, 8
+
+3
+
+1, 2, 4, 5, 8
+
+4
+
+1, 2, 4, 5, 8
+
+Notice that the largest unsorted element reaches its correct position after each pass.
+
+3. Algorithm
+
+text
+FOR i = 0 to n-2
+
+    FOR j = 0 to n-i-2
+
+        IF arr[j] > arr[j+1]
+
+            Swap arr[j] and arr[j+1]
+
+        END IF
+
+    END FOR
+
+END FOR
+4. Important external exam points
+Property
+
+Bubble sort
+
+Best-case time
+
+O(n), with early termination optimisation
+
+Average-case time
+
+O(n²)
+
+Worst-case time
+
+O(n²)
+
+Auxiliary space
+
+O(1)
+
+In-place
+
+Yes
+
+Stable
+
+Yes
+
+Adaptive
+
+Yes, with early termination
+
+5. Your practical exercise
+Write a complete C program implementing bubble sort.
+
+Requirements:
+
+Read n and the array elements.
+
+Sort in ascending order.
+
+Display the array after every pass.
+
+Display the final sorted array.
+
+Hints:
+
+You need two nested loops.
+
+Compare arr[j] with arr[j+1].
+
+Use a temporary variable for swapping.
+
+Think carefully about why the inner loop becomes shorter after every pass.
+
+Send me your code when you're ready. I'll review it just like we did with insertion and selection sort.
+
+
+i already know bubblesort as i learnt it as part of C in S2, so here's the code posterity's sake
+
+#include <stdio.h>
+int main()
+{
+    int n=0,i=0,j=0,temp=0;
+    printf("Enter no of elements: ");
+    scanf("%d",&n);
+    int arr[n];
+    for(i=0;i<n;i++)
+    {
+        printf("Enter element: ");
+        scanf("%d",&arr[i]);
+    }
+    printf("\n");
+    for(i=0;i<n;i++)
+    {
+        for(j=0;j<n-i-1;j++)
+        {
+            if(arr[j]>arr[j+1])
+            {
+                temp=arr[j];
+                arr[j]=arr[j+1];
+                arr[j+1]=temp;
+            }
+        }
+        printf("Pass %d: ",i);
+        for(j=0;j<n;j++)
+        {
+            printf("%d, ",arr[j]);
+        }
+        printf("\n");
+    }
+    return 0;
+}
+
+Haha, fair enough! Since you've already studied bubble sort in S2, we won't waste time relearning it. Let's focus on verifying your implementation and move forward.
+
+1. Code review
+Correct implementation
+Your bubble sort logic is correct!
+
+Let's review the important parts.
+
+Inner loop:
+
+
+c
+for(j=0;j<n-i-1;j++)
+Excellent. You're reducing the number of comparisons after every pass because the largest remaining element is already placed at the end.
+
+Comparison and swapping:
+
+
+c
+if(arr[j]>arr[j+1])
+{
+    temp=arr[j];
+    arr[j]=arr[j+1];
+    arr[j+1]=temp;
+}
+Correct. This implements ascending-order bubble sort.
+
+Pass display:
+
+Your pass-by-pass output is also correct.
+
+2. Minor improvements
+Three things I'd change for an external examination:
+
+Change for(i=0;i<n;i++) to for(i=0;i<n-1;i++). The final pass is unnecessary.
+
+Print i+1 instead of i so that your passes are numbered starting from 1.
+
+Consider adding a swapped variable to stop early if the array is already sorted.
+
+The third improvement gives you the optimised bubble sort with best-case complexity O(n).
+
+For example:
+
+
+c
+int swapped;
+
+for(i=0;i<n-1;i++)
+{
+    swapped=0;
+
+    for(j=0;j<n-i-1;j++)
+    {
+        if(arr[j]>arr[j+1])
+        {
+            temp=arr[j];
+            arr[j]=arr[j+1];
+            arr[j+1]=temp;
+            swapped=1;
+        }
+    }
+
+    if(swapped==0)
+        break;
+}
+You don't need this optimisation unless your lab question or instructor expects it.
+
+3. Sorting progress
+Your sorting preparation
+3 of 7 algorithms covered
+
+43%
+Insertion sort
+
+Completed
+Selection sort
+
+Completed
+Bubble sort
+
+Completed
+Merge sort
+
+Next
+Quick sort
+
+Pending
+Heap sort
+
+Pending
+Radix sort
+
+Pending
+4. Next: Merge Sort
+This is where things become slightly more interesting because we'll introduce recursion and merging.
+
+DSA Part 11: Heaps, Sorting & Hashing | Wasil Zafar
+ 
+Unlike the previous three algorithms, merge sort follows the divide and conquer approach.
+
+Its three main steps are:
+
+Divide the array into two halves.
+
+Recursively sort both halves.
+
+Merge the two sorted halves into one sorted array.
+
+Important properties:
+
+Property
+
+Merge sort
+
+Best case
+
+O(n log n)
+
+Average case
+
+O(n log n)
+
+Worst case
+
+O(n log n)
+
+Auxiliary space
+
+O(n)
+
+Stable
+
+Yes
+
+In-place
+
+No, in the usual array implementation
+
+5. Before coding
+I want to check one concept first.
+
+Suppose we have:
+
+[38, 27, 43, 3, 9, 82, 10]
+
+Question: After repeatedly dividing the array until every subarray contains exactly one element, what are the individual elements/subarrays?
+
+And a second question: Why do we need the merge operation after dividing everything?
+
+Answer these in your own words. Then we'll build the C implementation together, particularly the recursive mergeSort() and merge() functions.
+
+
+the individual elements are single element arrays. i actually didn't understand your first question to be honest.
+
+because when we merge them, we sort the components in the correct order before merging them, that's the whole point of merge sort.
+
+That's perfectly fine! In fact, your second answer tells me that you understand the fundamental purpose of merge sort. We just need to make the division process clearer.
+
+Let's slow down a little before jumping into C code.
+
+1. Understanding the division process
+Take this array:
+
+[38, 27, 43, 3, 9, 82, 10]
+
+My first question was asking you to show how this array gets divided repeatedly until every part contains just one element.
+
+It happens like this:
+
+
+Learn more
+Notice something important:
+
+First, we divide the array into two halves.
+
+Then we divide each half again.
+
+We continue until every subarray has exactly one element.
+
+Why one element?
+
+Because an array containing just one element is already sorted!
+
+This is the base case of merge sort recursion.
+
+2. Understanding the merging process
+Now comes the interesting part.
+
+Suppose we have these two sorted subarrays:
+
+
+text
+Left:  [3, 27, 38]
+Right: [9, 43, 82]
+We need to merge them into one sorted array.
+
+We compare the first available elements of both arrays.
+
+Comparison
+
+Selected element
+
+Result
+
+3 vs 9
+
+3
+
+[3]
+
+27 vs 9
+
+9
+
+[3, 9]
+
+27 vs 43
+
+27
+
+[3, 9, 27]
+
+38 vs 43
+
+38
+
+[3, 9, 27, 38]
+
+43 vs remaining
+
+43
+
+[3, 9, 27, 38, 43]
+
+Remaining
+
+82
+
+[3, 9, 27, 38, 43, 82]
+
+Final result:
+
+[3, 9, 27, 38, 43, 82]
+
+This is why merging is important: we combine two already sorted arrays into one sorted array.
+
+3. Two functions in the C implementation
+Merge sort is generally implemented using two functions:
+
+Function
+
+Responsibility
+
+mergeSort()
+
+Recursively divides the array
+
+merge()
+
+Combines two sorted portions
+
+The general structure looks like this:
+
+
+c
+void mergeSort(int arr[], int low, int high)
+{
+    if(low < high)
+    {
+        int mid = (low + high) / 2;
+
+        mergeSort(arr, low, mid);
+        mergeSort(arr, mid + 1, high);
+
+        merge(arr, low, mid, high);
+    }
+}
+Don't worry about the merge() function yet. We'll build it separately.
+
+4. Check your understanding
+Before we start implementing the functions, answer these three questions:
+
+Why is the condition if(low < high) used instead of if(low <= high)?
+
+If low = 0 and high = 6, what will be the value of mid?
+
+Why do we call merge() only after both recursive calls have completed?
+
+Don't worry about getting everything right. I want you to understand recursion before we write the complete merge sort program.
+
+
+1. because low<=high would also consider one element arrays are unsorted, which we do not want as single element arrays are already sorted.
+2. 3
+3. because when the recursive calls are complete, the merge will be called on two single element arrays or "sorted arrays", which will give a sorted multielement array which will again be merged with another multielement sorted array until the final sorted array is returned.
+
+Excellent! All three answers are correct. More importantly, your third answer shows that you're beginning to understand how recursive calls build upon one another.
+
+Let's evaluate them.
+
+1. Your answers
+Q1. Why low < high instead of low <= high?
+
+Correct
+Exactly. When low == high, there is only one element, which is already sorted.
+
+If we used low <= high, recursion would continue even for a single-element subarray, eventually causing infinite recursion.
+
+Q2. If low = 0 and high = 6, find mid.
+
+Correct
+m
+i
+d
+=
+0
++
+6
+2
+=
+3
+mid= 
+2
+0+6
+​
+ =3
+So:
+
+Left portion: indices 0 to 3.
+
+Right portion: indices 4 to 6.
+
+Q3. Why merge after both recursive calls?
+
+Correct
+Exactly! Both portions must be sorted before we can merge them into a larger sorted portion.
+
+One small refinement: merge() isn't necessarily merging two single-element arrays. As recursion returns, it merges progressively larger sorted subarrays.
+
+2. Now let's implement merge sort
+We'll build this in two parts.
+
+First, understand the merge() function. This is arguably the most important part of the implementation.
+
+Suppose:
+
+
+text
+Left array:  [12, 27, 38]
+Right array: [9, 16, 43]
+We need three indices:
+
+i: Tracks the current position in the left portion.
+
+j: Tracks the current position in the right portion.
+
+k: Tracks the position in the original array where we insert the smaller element.
+
+Merge Sort algorithm
+ 
+3. The merge function
+Here's the pseudocode:
+
+
+text
+i = low
+j = mid + 1
+k = low
+
+WHILE i <= mid AND j <= high
+
+    IF arr[i] <= arr[j]
+        temp[k] = arr[i]
+        i++
+    ELSE
+        temp[k] = arr[j]
+        j++
+
+    k++
+
+END WHILE
+
+WHILE i <= mid
+    temp[k] = arr[i]
+    i++
+    k++
+
+WHILE j <= high
+    temp[k] = arr[j]
+    j++
+    k++
+
+COPY temp[low...high] BACK TO arr
+There are three important stages:
+
+Compare elements from both halves and copy the smaller one.
+
+Copy any remaining elements from the left or right half.
+
+Copy the merged result back into the original array.
+
+4. Your next exercise
+Before I give you the complete C implementation, I want you to write the merge() function yourself.
+
+Use this function declaration:
+
+
+c
+void merge(int arr[], int low, int mid, int high)
+You can use a temporary array declared inside the function:
+
+
+c
+int temp[high - low + 1];
+Remember that its indexing starts at zero, so be careful when using k.
+
+Don't worry if you make mistakes. We'll debug it together, just as we did with insertion and selection sort.
+
+One important goal: By the end of this experiment, I want you to be able to write both merge() and mergeSort() independently, without needing to memorise the complete program line by line.
+
+
+Save your preferences
+Log in for a more personalized ChatGPT experience.
+
+
+Log in
+
+Sign up for free
 ChatGPT is AI and can make mistakes.
 
 New chat
@@ -2016,6 +3285,325 @@ You’ll get smarter responses and can upload files, images, and more.
 
 Log in
 Sign up for free
+Chat with ChatGPT
+#include <stdio.h>
+void merge(int arr[], int low, int mid, int high)
+{
+    int temp[high+1];
+    int i=low, j=mid+1, k=0;
+    while(i<=mid && j<=high)
+    {
+        if(arr[i]<arr[j])
+        {
+            temp[k]=arr[i];
+            i++;
+        }
+        else
+        {
+            temp[k]=arr[j];
+            j++;
+        }
+        k++;
+    }
+    while(i<=mid)
+    {
+        temp[k]=arr[i];
+        i++;
+        k++;
+    }
+    while(j<=high)
+    {
+        temp[k]=arr[j];
+        j++;
+        k++;
+    }
+    for(k=low;k<high+1;k++)
+    {
+        arr[k]=temp[k];
+    }
+    for(k=0;k<high+1;k++)
+    {
+        printf("%d, ",arr[k]);
+    }
+}
+void mergeSort(int arr[], int low, int high)
+{
+    if(low<high)
+    {
+        int mid=(low+high)/2;
+        mergeSort(arr, low, mid);
+        mergeSort(arr, mid+1, high);
+        merge(arr, low, mid, high);
+    }
+}
+int main()
+{
+    int n=0,i=0;
+    printf("Enter no of elements: ");
+    scanf("%d",&n);
+    int arr[n];
+    for(i=0;i<n;i++)
+    {
+        printf("Enter element: ");
+        scanf("%d",&arr[i]);
+    }
+    mergeSort(arr,0,n);
+    printf("Sorted array: ");
+    for(i=0;i<n;i++)
+    {
+        printf("%d, ",arr[i]);
+    }
+    return 0;
+}
+
+what;s wrong?
+
+
+continue this conversation?
+
+Absolutely, let's continue from exactly where we stopped! You're doing well with merge sort, and your implementation shows that you've understood the recursive division and the merging process.
+
+There are four important errors in your code. Two are directly responsible for incorrect sorting, one is an indexing issue, and one is in how you call the recursive function.
+
+Let's debug them individually.
+
+1. Incorrect initial value of high in main()
+You wrote:
+
+
+c
+mergeSort(arr,0,n);
+This is incorrect because array indices range from 0 to n-1.
+
+For example, if n = 5, your valid indices are:
+
+
+text
+0 1 2 3 4
+But you're passing high = 5, which is outside the array.
+
+Correction:
+
+
+c
+mergeSort(arr, 0, n-1);
+This is a very common mistake, so remember:
+
+n represents the number of elements.
+
+n-1 represents the last valid index.
+
+2. Incorrect temporary array indexing
+You declared:
+
+
+c
+int temp[high+1];
+int i=low, j=mid+1, k=0;
+Here, you're mixing two different indexing approaches.
+
+Your temporary array starts at index 0, but your merge operation works with the original array's indices, from low to high.
+
+For example, suppose:
+
+
+text
+low = 2
+mid = 3
+high = 5
+Your merge operation needs to handle:
+
+Left half: indices 2 and 3.
+
+Right half: indices 4 and 5.
+
+However, your k starts at zero.
+
+You can solve this in either of two ways.
+
+Approach A – Use relative indexing (recommended)
+
+
+c
+int temp[high-low+1];
+int i=low, j=mid+1, k=0;
+Then copy back using:
+
+
+c
+for(k=0; k<high-low+1; k++)
+{
+    arr[low+k] = temp[k];
+}
+Approach B – Use original array indices
+
+
+c
+int temp[high+1];
+int i=low, j=mid+1, k=low;
+Then your existing copy-back loop can work.
+
+I'd recommend Approach A because it uses less temporary memory for each merge operation.
+
+3. Your copy-back logic is incorrect
+You wrote:
+
+
+c
+for(k=low;k<high+1;k++)
+{
+    arr[k]=temp[k];
+}
+This is the consequence of the indexing mismatch in the previous section.
+
+If you use Approach A, the corrected code is:
+
+
+c
+for(k=0; k<high-low+1; k++)
+{
+    arr[low+k] = temp[k];
+}
+Notice that we're copying the temporary array's elements into the corresponding positions of the original array.
+
+4. Your merge comparison should use <=
+You wrote:
+
+
+c
+if(arr[i]<arr[j])
+Change this to:
+
+
+c
+if(arr[i]<=arr[j])
+Why?
+
+This ensures that when two elements are equal, the element from the left subarray is selected first.
+
+This preserves the stability of merge sort.
+
+Your implementation will still sort correctly with <, but it won't necessarily be stable.
+
+5. Corrected merge() function
+Here is your function with the corrections applied, retaining your coding style.
+
+
+c
+void merge(int arr[], int low, int mid, int high)
+{
+    int temp[high-low+1];
+    int i=low, j=mid+1, k=0;
+
+    while(i<=mid && j<=high)
+    {
+        if(arr[i]<=arr[j])
+        {
+            temp[k]=arr[i];
+            i++;
+        }
+        else
+        {
+            temp[k]=arr[j];
+            j++;
+        }
+        k++;
+    }
+
+    while(i<=mid)
+    {
+        temp[k]=arr[i];
+        i++;
+        k++;
+    }
+
+    while(j<=high)
+    {
+        temp[k]=arr[j];
+        j++;
+        k++;
+    }
+
+    for(k=0;k<high-low+1;k++)
+    {
+        arr[low+k]=temp[k];
+    }
+}
+I've also removed the printing from merge(). The merge function should ideally handle merging only. We can print the array in mergeSort() or in main() when needed.
+
+6. Corrected mergeSort() and main()
+Your recursive function is actually correct!
+
+
+c
+void mergeSort(int arr[], int low, int high)
+{
+    if(low<high)
+    {
+        int mid=(low+high)/2;
+
+        mergeSort(arr, low, mid);
+        mergeSort(arr, mid+1, high);
+
+        merge(arr, low, mid, high);
+    }
+}
+Only change the function call in main():
+
+
+c
+mergeSort(arr,0,n-1);
+7. Let's test your understanding
+I want to make sure you understand the indexing issue rather than simply applying the corrections.
+
+Consider this array:
+
+
+text
+[10, 5, 8, 2, 7, 3]
+Suppose we're merging:
+
+low = 2
+
+mid = 3
+
+high = 5
+
+Answer these questions:
+
+Which two subarrays are being merged?
+
+What should be the size of temp[]?
+
+If k = 0 in the temporary array, which original array index does that correspond to?
+
+Why do we copy temp[k] into arr[low+k] rather than arr[k]?
+
+Once you answer these, we'll mark merge sort as completed and move to Quick Sort, where we'll tackle pivot selection and partitioning.
+
+One observation about your progress: you're now independently writing recursive functions and handling multiple indices. That's a meaningful step up from the simpler sorting algorithms. Keep going!
+
+
+Upload files and ask questions
+Log in to upload a file and get help with it.
+
+
+Log in
+
+Sign up for free
+ChatGPT is AI and can make mistakes.
+
+New chat
+Images
+Plugins
+See plans and pricing
+Help
+
+Deep research
+Settings
+Get responses tailored to you
+Log in to get answers based on saved chats, plus create images and upload files.
+
 Chat with ChatGPT
 Ask ChatGPT
 
