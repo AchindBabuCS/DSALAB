@@ -5,6 +5,8 @@ Log in
 Sign up for free
 Log in
 Sign up for free
+Log in
+Sign up for free
 DSA_Lab_Index_Final_Bold-JPG-1024.jpg
 hi, so i'm a second year S3 B.Tech Computer Science and Business Systems student at Govt Model Engineering College Thrikakarra under KTU 2024 scheme. i have Data Structures Lab  external lab exam next week, and i am going to start preparing for it from today onwards. i have a basic understanding of datastructures and am moderately thorough with the main concepts. And i am now trying to do all the lab experiments i did in lab sessions myself, and trying to prepare for the lab exam as best as possible, and i need you help to do it. i first want to tackle all the sorting techniques as they were taught first in the course but i just want to get them out of the way so that i can tackle the other topics better. so, i will upload the total list of all the programs we have done in our lab so far, this list is the index of our fair record as well. the sorting techniques we also studied are insertion sort, selection sort, bubble sort, merge sort, quick sort, heap sort, radix sort. but first can you make me a quiz and analyse my results and find out what sort of preparation level i am already at due to the internal lab exams and lab sessions experience and knowledge?
 
@@ -5040,6 +5042,6521 @@ ChatGPT is AI and can make mistakes.
 New chat
 Images
 Shopping
+Plugins
+See plans and pricing
+Help
+
+Deep research
+Settings
+Get responses tailored to you
+Log in to get answers based on saved chats, plus create images and upload files.
+
+Chat with ChatGPT
+Ask ChatGPT
+
+Let's work through it!
+
+Given:
+
+
+c
+int arr[] = {4, 10, 3, 5, 1};
+int n = 5;
+Your answers – Build Max Heap
+Q1. What is the value of (n/2)-1?
+
+Remember that integer division is used in C.
+
+Q2. At which index will buildHeap() start?
+
+Q3. In which direction will the loop move?
+
+A. Root to leaves
+
+B. Leaves to root
+
+Q4. Why don't we need to call heapify() on leaf nodes?
+
+One additional thing to understand
+For this array:
+
+Binary Heap representation
+
+Index: 0, 1, 2, 3, 4
+
+Array representation
+
+[4, 10, 3, 5, 1]
+
+Notice that indices 3 and 4 are leaf nodes. They don't have children, so they automatically satisfy the Max Heap property.
+
+Remember: Build Heap works bottom-up because we need the child subtrees to be heaps before heapifying their parents.
+
+Answer these four questions, and then we'll implement buildHeap() ourselves before moving to the final heapSort() function.
+
+
+1. 1
+2. the last non lead index
+3. B
+4. because they have no children and thus do not need to be heapified.
+
+Excellent! All four answers are correct. You're understanding the heap construction process well.
+
+Let's evaluate them:
+
+Question
+
+Your answer
+
+Result
+
+Q1. (n/2)-1
+
+1
+
+Correct
+
+Q2. Starting index
+
+Last non-leaf index
+
+Correct
+
+Q3. Direction
+
+Leaves to root (B)
+
+Correct
+
+Q4. Why skip leaves?
+
+No children
+
+Correct
+
+One small clarification for Q2: the actual starting index is 1, because (5/2)-1 = 1 using integer division in C.
+
+1. Let's implement buildHeap()
+You've already written heapify(). Now buildHeap() is comparatively simple.
+
+Your task is to implement:
+
+
+c
+void buildHeap(int arr[], int n)
+Requirements:
+
+Start from the last non-leaf node.
+
+Move backwards towards index 0.
+
+Call heapify() at every index.
+
+Try writing this function yourself. It's only a few lines!
+
+2. What's left in Heap Sort?
+We're almost done with this experiment.
+
+Heap Sort progress
+Understand binary heaps
+
+Completed
+Implement heapify()
+
+Completed
+Implement buildHeap()
+
+Current task
+Implement heapSort()
+
+Upcoming
+Complete program and dry run
+
+Upcoming
+After buildHeap(), the final heapSort() function will combine heap construction, root extraction, swapping and repeated heapification.
+
+Go ahead and write your buildHeap() function. Don't look at the earlier code; let's see if you can reproduce the logic independently!
+
+
+void buildHeap(int arr[], int n)
+{
+    for(int i=(n/2)-1;i>=0;i--)
+    {
+        heapify(arr,n,i);
+    }
+}
+
+Perfect! Your buildHeap() function is 100% correct. No corrections needed.
+
+
+c
+void buildHeap(int arr[], int n)
+{
+    for(int i=(n/2)-1; i>=0; i--)
+    {
+        heapify(arr, n, i);
+    }
+}
+Why your implementation is correct
+(n/2)-1 identifies the last non-leaf node.
+
+i >= 0 ensures that the root (index 0) is also heapified.
+
+i-- moves upwards through the tree.
+
+heapify(arr,n,i) restores the Max Heap property at each node.
+
+One important observation: the bottom-up order is essential. When you heapify a parent, its child subtrees must already satisfy the heap property.
+
+Next: Implement heapSort()
+Now comes the final function!
+
+The algorithm has two stages:
+
+Stage 1: Build Max Heap
+
+
+c
+buildHeap(arr, n);
+The largest element is now at arr[0].
+
+Stage 2: Extract the maximum repeatedly
+
+For every iteration:
+
+Swap arr[0] with arr[i].
+
+Reduce the effective heap size to i.
+
+Call heapify() on the root again.
+
+The pseudocode:
+
+
+text
+heapSort(arr, n)
+
+    buildHeap(arr, n)
+
+    for i = n-1 down to 1
+
+        swap arr[0] and arr[i]
+
+        heapify(arr, i, 0)
+
+    end for
+Your practical exercise
+Write this function independently:
+
+
+c
+void heapSort(int arr[], int n)
+A few things to remember:
+
+Why do we start i at n-1?
+
+Why does heapify() receive i instead of n?
+
+Why do we always heapify from index 0?
+
+Don't write the entire program yet. Just send me your heapSort() function.
+
+You're doing well with Heap Sort. Your heapify() and buildHeap() implementations are now correct, so we're very close to completing this experiment!
+
+
+void heapSort(int arr[], int n)
+{
+    buildHeap(arr, n);
+    for(int i=n-1;i>=0;i--)
+    {
+        int temp=arr[0];
+        arr[0]=arr[i];
+        arr[i]=temp;
+        heapify(arr, n, 0);
+        int k=1;
+        printf("Pass %d: ",k++);
+        for(int j=0;j<n;j++)
+        {
+            printf("%d, ",arr[j]);
+        }
+        printf("\n");
+    }
+}
+
+You're very close! Your heapSort() implementation has a few small mistakes.
+
+Issues in your code
+1. Incorrect heap size in heapify()
+
+You are using:
+
+
+cpp
+heapify(arr, n, 0);
+After swapping the root with the last element, that last element is already in its correct sorted position.
+
+So, you should reduce the heap size:
+
+
+cpp
+heapify(arr, i, 0);
+2. Pass counter is inside the loop
+
+You declared:
+
+
+cpp
+int k = 1;
+inside the loop, so it resets to 1 on every iteration.
+
+Move it before the loop.
+
+3. Loop condition
+
+Use i > 0 rather than i >= 0. When i == 0, there is only one element left, so no further swapping or heapification is necessary.
+
+Corrected code
+
+cpp
+
+void heapSort(int arr[], int n)
+{
+    buildHeap(arr, n);
+
+    int k = 1;
+
+    for(int i = n - 1; i > 0; i--)
+    {
+        int temp = arr[0];
+        arr[0] = arr[i];
+        arr[i] = temp;
+
+        heapify(arr, i, 0);
+
+        printf("Pass %d: ", k++);
+
+        for(int j = 0; j < n; j++)
+        {
+            printf("%d, ", arr[j]);
+        }
+
+        printf("\n");
+    }
+}
+Important concept to remember
+In heap sort:
+
+n is the original array size.
+
+i represents the current heap size after each extraction.
+
+arr[i] is already in its sorted position.
+
+Only the remaining i elements should be heapified.
+
+Your understanding of the algorithm is good. The main thing to remember is that the heap size decreases after every extraction.
+
+Quick question to test your understanding
+Why do we use heapify(arr, i, 0) instead of heapify(arr, n, 0) after swapping the root with the last element?
+
+Try answering in your own words!
+
+
+because we need to check if the subtree who's element was swapped, follows heap condition.
+
+Correct! You're on the right track. 😊
+
+More precisely:
+
+After swapping the root with the last element, the last element is already in its correct sorted position.
+
+Therefore, we reduce the heap size to i so that heapify() checks and restores the heap property only within the remaining unsorted portion of the array.
+
+Your answer correctly identifies that heapify is needed to restore the heap condition.
+
+One important distinction: We don't just check the subtree where the swap happened; we restore the heap property for the entire affected heap, starting from the root.
+
+Concept understood
+Next, can you tell me the time complexity of:
+
+buildHeap()
+
+heapify()
+
+heapSort()?
+
+
+Log in for a more personalized ChatGPT experience.
+
+
+Log in
+
+Sign up for free
+1. O(n)
+2. O(nlogn)
+3. O(n)
+
+Good attempt! You got 1 out of 3 completely correct, but let's fix the other two.
+
+Function
+
+Your answer
+
+Correct answer
+
+buildHeap()
+
+O(n)
+
+O(n)
+
+heapify()
+
+O(n log n)
+
+O(log
+n)
+
+heapSort()
+
+O(n)
+
+O(n
+log
+n)
+
+1. buildHeap() — O(n)
+Although it calls heapify() multiple times, most nodes are near the leaves and require very little work. The total work is O(n).
+
+2. heapify() — O(log n)
+In the worst case, an element moves from the root down to a leaf.
+
+A binary heap has a height of approximately log₂(n), so heapify takes O(log n).
+
+3. heapSort() — O(n log n)
+Building the heap: O(n).
+
+Extracting the maximum element: O(log n) per extraction.
+
+There are n−1 extractions.
+
+Therefore:
+
+O
+(
+n
+)
++
+O
+(
+n
+log
+⁡
+n
+)
+=
+O
+(
+n
+log
+⁡
+n
+)
+O(n)+O(nlogn)=O(nlogn)
+
+Learn more
+Test your understanding
+Why is heapify() O(log n) and not O(n)?
+
+Try explaining it without looking at the explanation above.
+
+
+worst case, incase it moves from root to leaf.
+
+Exactly correct! 🎯
+
+In the worst case, during heapify, an element moves from the root all the way down to a leaf.
+
+Since a binary heap is a complete binary tree, its height is O(log n).
+
+Therefore:
+
+T
+(
+n
+)
+=
+O
+(
+log
+⁡
+n
+)
+T(n)=O(logn)
+​
+ 
+Concept understood
+You're getting comfortable with heap operations!
+
+One final question:
+
+What is the space complexity of heapSort() if we sort the array in-place (without creating another array)?
+
+
+i don't know that. sorry. 
+
+#include <stdio.h>
+void heapify(int arr[], int n, int i)
+{
+    int largest=i;
+    int left=(2*i)+1;
+    int right=(2*i)+2;
+    if(n>left && arr[largest]<arr[left])
+    {
+        largest=left;
+    }
+    if(n>right && arr[largest]<arr[right])
+    {
+        largest=right;
+    }
+    if(largest!=i)
+    {
+        int temp=arr[i];
+        arr[i]=arr[largest];
+        arr[largest]=temp;
+    }
+    heapify(arr, n, largest);
+}
+void buildHeap(int arr[], int n)
+{
+    for(int i=(n/2)-1;i>=0;i--)
+    {
+        heapify(arr,n,i);
+    }
+}
+void heapSort(int arr[], int n)
+{
+    buildHeap(arr, n);
+    int k=1;
+    for(int i=n-1;i>0;i--)
+    {
+        int temp=arr[0];
+        arr[0]=arr[i];
+        arr[i]=temp;
+        heapify(arr, i, 0);
+        
+        printf("Pass %d: ",k++);
+        for(int j=0;j<n;j++)
+        {
+            printf("%d, ",arr[j]);
+        }
+        printf("\n");
+    }
+}
+int main()
+{
+    int n=0,i=0;
+    printf("Enter no of elements: ");
+    scanf("%d",&n);
+    int arr[n];
+    for(i=0;i<n;i++)
+    {
+        printf("Enter element: ");
+        scanf("%d",&arr[i]);
+    }
+    heapSort(arr, n);
+    return 0;
+}
+
+whats's wrogng?
+
+No need to apologize! You're learning, and asking questions is part of the process. 😊
+
+I went through your code. There is one major logical error in your heapify() function and a few things worth improving.
+
+1. Major error in heapify()
+Your code:
+
+
+cpp
+if(largest!=i)
+{
+    int temp=arr[i];
+    arr[i]=arr[largest];
+    arr[largest]=temp;
+}
+heapify(arr, n, largest);
+The problem is that you are calling heapify() even when largest == i.
+
+This can cause infinite recursion because the function keeps calling itself with the same index.
+
+For example, if the root already satisfies the heap property:
+
+largest remains equal to i.
+
+No swapping occurs.
+
+heapify(arr, n, i) gets called again.
+
+The same thing repeats indefinitely.
+
+Correction
+Move the recursive call inside the if block:
+
+
+cpp
+if(largest != i)
+{
+    int temp = arr[i];
+    arr[i] = arr[largest];
+    arr[largest] = temp;
+
+    heapify(arr, n, largest);
+}
+Now recursion happens only when a swap is necessary.
+
+2. Your corrected heapify()
+
+cpp
+
+void heapify(int arr[], int n, int i)
+{
+    int largest = i;
+    int left = (2*i) + 1;
+    int right = (2*i) + 2;
+
+    if(left < n && arr[left] > arr[largest])
+    {
+        largest = left;
+    }
+
+    if(right < n && arr[right] > arr[largest])
+    {
+        largest = right;
+    }
+
+    if(largest != i)
+    {
+        int temp = arr[i];
+        arr[i] = arr[largest];
+        arr[largest] = temp;
+
+        heapify(arr, n, largest);
+    }
+}
+Notice that I also changed:
+
+n > left to left < n.
+
+n > right to right < n.
+
+Both are equivalent, but the second form is easier to read.
+
+3. The rest of your code
+Your buildHeap() is correct.
+
+Your heapSort() is also correct, including:
+
+Reducing the heap size using i.
+
+Keeping the pass counter outside the loop.
+
+Printing the entire array after each pass.
+
+Your main() is fine for a basic program.
+
+4. One more concept: Space complexity
+Remember my previous question?
+
+When we use in-place heap sort, we don't create another array.
+
+However, your recursive heapify() uses the function call stack.
+
+Since the maximum recursion depth is O(log n), your implementation has:
+
+Auxiliary space: O(log n) due to recursion.
+
+Iterative heap sort with iterative heapify: O(1) auxiliary space.
+
+5. Let's test your code
+Try this input:
+
+
+text
+Enter no of elements: 5
+Enter element: 4
+Enter element: 10
+Enter element: 3
+Enter element: 5
+Enter element: 1
+The final sorted array should be:
+
+
+text
+1, 3, 4, 5, 10
+One question for you:
+
+Why should we put the recursive heapify() call inside if(largest != i) instead of outside it?
+
+I want you to explain this because understanding this condition is important for writing recursive algorithms.
+
+
+because it is only necessary if there was a swap, as if swap occured, we need to check the subtree from which element was swapped to see if subtree follows heap condition, otherwise not needed to be checked.
+
+Excellent! That's absolutely correct. You've understood the logic. 🎯
+
+Let me refine your explanation slightly:
+
+If a swap occurs: The element moved down to a child position. We must recursively heapify that child's subtree because the heap property might be violated there.
+
+If no swap occurs: The current node is already larger than or equal to its children. Therefore, the heap property is satisfied, and no further recursion is necessary.
+
+Your explanation captures the most important idea: we only need to continue checking down the tree when a swap occurs.
+
+Correct understanding!
+What's next?
+You've now covered:
+
+Max heap construction.
+
+Heapify.
+
+Build heap.
+
+Heap sort.
+
+Time complexity.
+
+Recursive heapify logic.
+
+I'd suggest one small challenge before moving on:
+
+Can you implement heapify() iteratively (using a while loop instead of recursion)?
+
+This will also help you understand why iterative heap sort can achieve O(1) auxiliary space.
+
+
+ok, heapsort is done. next
+
+Great! 🎉 Heap Sort is done. Let's move to the next sorting algorithm.
+
+I'd recommend following this sequence:
+
+Bubble Sort
+
+Selection Sort
+
+Insertion Sort
+
+Merge Sort
+
+Quick Sort
+
+Counting Sort
+
+Radix Sort
+
+Since you've already studied Heap Sort, let's move to Merge Sort next. It's particularly important because it introduces the divide-and-conquer technique.
+
+DSCI 221: Data Structures and Algorithms for Data Science – Merge Sort and Recurrence Forms
+ 
+Merge Sort
+
+Technique: Divide and Conquer
+
+Time complexity: O(n log n)
+
+Auxiliary space: O(n)
+
+Stable sorting algorithm
+
+How would you like to proceed?
+We can learn it step by step, just like Heap Sort:
+
+Understand the concept and working.
+
+Dry run with an example.
+
+Understand the recursive logic.
+
+Write the C implementation.
+
+Analyse time and space complexity.
+
+Solve practice questions.
+
+Let's start with the concept!
+
+
+nono, bubble, insertion, selection, merge, heap is done. what's next after these?
+
+Got it! Since you've completed:
+
+Bubble Sort
+
+Insertion Sort
+
+Selection Sort
+
+Merge Sort
+
+Heap Sort
+
+Your next topic should be Quick Sort.
+
+Recommended sorting algorithms roadmap
+Algorithm
+
+Time complexity (average)
+
+Quick Sort
+
+O(n log n)
+
+Counting Sort
+
+O(n + k)
+
+Radix Sort
+
+O(d(n + k))
+
+Bucket Sort
+
+O(n + k) expected
+
+Let's start with Quick Sort.
+Introduction to Algorithms Handbook – with JavaScript Examples
+ 
+Important concepts you'll learn:
+
+Divide and conquer.
+
+Choosing a pivot.
+
+Partitioning an array.
+
+Recursive calls.
+
+Time and space complexity.
+
+We'll follow the same approach as Heap Sort: concept → dry run → C implementation → complexity → practice questions.
+
+Ready for Quick Sort?
+
+
+sorry, quick sort is also done
+
+No problem! 😄
+
+So you've completed:
+
+Bubble Sort
+
+Selection Sort
+
+Insertion Sort
+
+Merge Sort
+
+Quick Sort
+
+Heap Sort
+
+Your next sorting algorithms should be:
+
+Counting Sort – Non-comparison-based sorting.
+
+Radix Sort – Sorts numbers digit by digit.
+
+Bucket Sort – Distributes elements into buckets and sorts them individually.
+
+Shell Sort – An improvement over insertion sort using gaps.
+
+I'd recommend starting with Counting Sort.
+
+It introduces an important concept: sorting without comparing elements against each other.
+
+Would you like to start with Counting Sort?
+
+
+i only have radix sort left to study in sorting
+
+Perfect! Then let's move on to Radix Sort. 🎯
+
+Since you've already completed the other major sorting algorithms, Radix Sort is your final sorting topic.
+
+Radix Sort
+PPT - Radix and Bucket Sort PowerPoint Presentation, free download - ID:6124893
+ 
+Here's what we'll cover:
+
+Concept: How Radix Sort works.
+
+Types: LSD (Least Significant Digit) and MSD (Most Significant Digit).
+
+Dry run: Sort an array digit by digit.
+
+Stable sorting: Why stability is important in Radix Sort.
+
+C implementation: Write the complete program.
+
+Complexity analysis: Best, average, and worst cases.
+
+Practice: Questions and coding exercises.
+
+Let's begin with the basic concept.
+
+Radix Sort sorts numbers by processing individual digits rather than comparing entire numbers.
+
+We'll use LSD Radix Sort first, which starts from the rightmost digit (units place).
+
+Ready? Let's work through an example together!
+
+
+ok
+
+Great! Let's learn Radix Sort (LSD) step by step.
+
+1. Understanding Radix Sort
+Radix Sort is a non-comparison-based sorting algorithm.
+
+Unlike Bubble Sort or Selection Sort, it doesn't compare two complete numbers to determine their order.
+
+Instead, it sorts numbers digit by digit.
+
+It starts from the Least Significant Digit (LSD), which is the rightmost digit.
+
+2. Example
+Consider this array:
+
+[
+170
+,
+ 
+45
+,
+ 
+75
+,
+ 
+90
+,
+ 
+802
+,
+ 
+24
+,
+ 
+2
+,
+ 
+66
+]
+[170, 45, 75, 90, 802, 24, 2, 66]
+We sort it in three passes.
+
+Pass 1: Sort by units digit
+
+Rightmost digit
+
+170
+90
+802
+2
+24
+45
+75
+66
+Pass 2: Sort by tens digit
+
+802
+2
+24
+45
+66
+170
+75
+90
+Pass 3: Sort by hundreds digit
+
+2
+24
+45
+66
+75
+90
+170
+802
+Final sorted array
+2, 24, 45, 66, 75, 90, 170, 802
+Notice that we perform three passes because the largest number (802) has three digits.
+
+3. Important concept: Stability
+Radix Sort generally uses a stable sorting algorithm (such as Counting Sort) for each digit.
+
+Stability means that if two elements have the same digit being processed, their relative order must remain unchanged.
+
+This is essential for Radix Sort to work correctly.
+
+4. Your first question!
+Suppose we have:
+
+[23, 12, 31, 14, 25]
+
+We are performing the first pass (units digit).
+
+What will the array look like after sorting by units digit?
+
+Try it yourself. I'll check your answer before we move to the next step.
+
+
+31,12,23,14,25
+
+Correct! 🎉 Your answer is absolutely right.
+
+Let's verify:
+
+Original array: [23, 12, 31, 14, 25]
+
+We look at the units digit:
+
+Number
+
+Units digit
+
+23
+
+3
+
+12
+
+2
+
+31
+
+1
+
+14
+
+4
+
+25
+
+5
+
+Sorting by units digit in ascending order gives:
+
+[31, 12, 23, 14, 25]
+
+Correct answer!
+Next question: Pass 2
+Now we sort the same array by the tens digit.
+
+Current array:
+
+[31, 12, 23, 14, 25]
+
+What will the array look like after sorting by tens digit?
+
+Remember: Maintain the relative order of elements having the same tens digit (stability).
+
+
+12,14,23,25,31
+
+Exactly correct! 🎉
+
+Let's verify the tens digits:
+
+Number
+
+Tens digit
+
+31
+
+3
+
+12
+
+1
+
+23
+
+2
+
+14
+
+1
+
+25
+
+2
+
+Sorting by tens digit:
+
+[12, 14, 23, 25, 31]
+
+Correct!
+Notice something important: 12 comes before 14, and 23 comes before 25. Their relative order is preserved because we use a stable sorting technique.
+
+Next: Understanding the implementation
+Before writing the C program, remember that Radix Sort needs:
+
+A way to find the maximum number (to determine the number of passes).
+
+A loop to process each digit (units, tens, hundreds, etc.).
+
+A stable sorting method for each digit (usually Counting Sort).
+
+Question: Why do you think we need to find the maximum element before starting Radix Sort?
+
+Try answering in your own words!
+
+
+because maximum element helps us learn howmany digit wise sorting passes need to be carried out before array is fully sorted
+
+Exactly! 💯 That's correct.
+
+The maximum element tells us the number of digits in the largest number, which determines how many passes Radix Sort needs.
+
+For example:
+
+Maximum = 95 → 2 passes (units, tens).
+
+Maximum = 802 → 3 passes (units, tens, hundreds).
+
+Maximum = 5432 → 4 passes.
+
+We commonly use this loop:
+
+
+c
+for(int exp = 1; max/exp > 0; exp *= 10)
+{
+    countSort(arr, n, exp);
+}
+Here:
+
+exp = 1 → units digit.
+
+exp = 10 → tens digit.
+
+exp = 100 → hundreds digit.
+
+exp = 1000 → thousands digit.
+
+Next step: Counting Sort inside Radix Sort
+The most important part of Radix Sort is understanding how Counting Sort sorts elements based on a particular digit.
+
+Question: If we have the number 472:
+
+What expression would extract its:
+
+Units digit?
+
+Tens digit?
+
+Hundreds digit?
+
+Try using division (/) and modulus (%).
+
+
+i don't know countring sort, which sorting technique should i use to sort digit wise instead?
+
+also,
+
+int y=472, c=0;
+while(y!=0){
+if(y%10!==0){
+c++;
+}
+y=y/10;
+}
+
+Good question! First, don't worry about Counting Sort. You don't necessarily need to study it separately before understanding Radix Sort.
+
+1. Which sorting technique should you use?
+For Radix Sort, Counting Sort is the standard choice for sorting individual digits.
+
+Why?
+
+There are only 10 possible decimal digits (0–9).
+
+Counting Sort can sort these digits efficiently.
+
+It is stable, which is essential for Radix Sort.
+
+You can learn the required Counting Sort concepts as part of Radix Sort itself.
+
+You could technically use Bubble Sort or Insertion Sort for each digit, but they are less efficient.
+
+2. Let's examine your code
+You wrote:
+
+
+c
+int y = 472, c = 0;
+
+while(y != 0)
+{
+    if(y % 10 !== 0)
+    {
+        c++;
+    }
+    y = y / 10;
+}
+I see what you're trying to do: count the number of digits.
+
+There are two things to correct.
+
+Mistake 1: C uses !=, not !==.
+
+!== is used in JavaScript, not C.
+
+Mistake 2: You don't need the if condition.
+
+Every iteration removes one digit, so simply increment c.
+
+Corrected code
+
+c
+int y = 472, c = 0;
+
+while(y != 0)
+{
+    c++;
+    y = y / 10;
+}
+
+printf("%d", c);
+Output:
+
+
+text
+3
+Your digit-counting logic is correct!
+3. Now let's test your understanding
+Suppose:
+
+
+c
+int num = 472;
+How would you extract:
+
+Units digit?
+
+Tens digit?
+
+Hundreds digit?
+
+Hint: Think about the % and / operators.
+
+Try answering these three before we move to the actual Radix Sort implementation!
+
+
+module one for units, modulo twice for tens, modulo thrice for hundreds
+
+You're close! You've understood that modulo is involved, but there's a small correction.
+
+You don't repeatedly apply modulo to the original number. Instead, you use division followed by modulo.
+
+For num = 472:
+
+Digit
+
+Expression
+
+Result
+
+Units
+
+(num / 1) % 10
+
+2
+
+Tens
+
+(num / 10) % 10
+
+7
+
+Hundreds
+
+(num / 100) % 10
+
+4
+
+General formula
+
+c
+digit = (num / exp) % 10;
+Where:
+
+exp = 1 → Units
+
+exp = 10 → Tens
+
+exp = 100 → Hundreds
+
+This is exactly the expression we'll use in Radix Sort!
+
+Quick practice
+For num = 5836, what are:
+
+Units digit?
+
+Tens digit?
+
+Hundreds digit?
+
+Thousands digit?
+
+Try it yourself!
+
+
+1.6
+2.3
+3.8
+4.5
+
+Perfect! All four answers are correct. 🎉
+
+For num = 5836:
+
+Digit
+
+Expression
+
+Answer
+
+Units
+
+(5836 / 1) % 10
+
+6
+
+Tens
+
+(5836 / 10) % 10
+
+3
+
+Hundreds
+
+(5836 / 100) % 10
+
+8
+
+Thousands
+
+(5836 / 1000) % 10
+
+5
+
+4/4 correct!
+Next step: Implementing Radix Sort
+Now you understand:
+
+How to count digits.
+
+Why we find the maximum element.
+
+How to extract individual digits.
+
+Why stability matters.
+
+Next, we'll learn the Counting Sort technique required inside Radix Sort, without needing to study the entire algorithm separately.
+
+One question before that:
+
+Are you comfortable with arrays and frequency-counting using another array?
+
+For example, given [2, 1, 2, 0, 1], creating a frequency array that stores how many times each digit occurs.
+
+
+no, i don't know what a frequency array is.
+
+#include <stdio.h>
+void radixSort(int arr[], int n)
+{
+    int max=arr[0],i=0,j=0,k=0,temp=0,c=0;
+    for(i=0;i<n;i++)
+    {
+        if(arr[i]>max)
+        {
+            max=arr[i];
+        }
+    }
+    while(max!=0)
+    {
+        c++;
+        max=max/10;
+    }
+    for(i=1;i<=c;i++)
+    {
+        for(j=0;j<c;j++)
+        {
+            int min=j;
+            for(k=j+1;k<n;k++)
+            {
+                if(((arr[k])/(10*i))<((arr[min])/(10*i)))
+                {
+                    min=k;
+                }
+            }
+            temp=arr[min];
+            arr[min]=arr[j];
+            arr[j]=temp;
+            printf("Pass %d: ",j);
+            for(k=0;k<n;k++)
+            {
+                printf("%d, ",arr[k]);
+            }
+            printf("\n");
+        }
+    }
+}
+int main()
+{
+    int n=0,i=0;
+    printf("Enter no of elements: ");
+    scanf("%d",&n);
+    int arr[n];
+    for(i=0;i<n;i++)
+    {
+        printf("Enter element: ");
+        scanf("%d",&arr[i]);
+    }
+    radixSort(arr,n);
+    return 0;
+}
+
+this is a trial by me to implement radix sort. is it working?
+
+I like that you attempted Radix Sort yourself before learning Counting Sort! That's a good way to learn algorithms.
+
+Your code has some of the right ideas:
+
+Finding the maximum element.
+
+Determining the number of digits.
+
+Performing multiple passes.
+
+Trying to sort based on individual digits.
+
+However, your current implementation will not perform Radix Sort correctly. Let's understand why, without throwing away your approach.
+
+1. Problems in your code
+Mistake 1: Incorrect digit extraction
+You wrote:
+
+
+c
+(arr[k]) / (10*i)
+This doesn't extract an individual digit.
+
+For example, if arr[k] = 472:
+
+Pass
+
+Your expression
+
+Correct digit
+
+Units
+
+472 / 10 = 47
+
+2
+
+Tens
+
+472 / 100 = 4
+
+7
+
+Hundreds
+
+472 / 1000 = 0
+
+4
+
+You need:
+
+
+c
+(arr[k] / exp) % 10
+Where exp is 1, 10, 100, 1000, etc.
+
+Mistake 2: Incorrect inner loop condition
+You wrote:
+
+
+c
+for(j=0; j<c; j++)
+Here, c is the number of digits in the maximum element.
+
+But j is traversing array positions, so you need:
+
+
+c
+for(j=0; j<n; j++)
+However, there is a bigger conceptual problem with this loop, which brings us to the next point.
+
+Mistake 3: Selection Sort is not suitable here
+You are trying to use Selection Sort to sort the array digit by digit.
+
+The problem is that Selection Sort is not stable.
+
+Remember our earlier discussion about stability?
+
+Radix Sort requires stability because the order established during previous digit passes must be preserved when sorting the next digit.
+
+For example, if two numbers have the same tens digit, their relative order from the units-digit pass must remain unchanged.
+
+This is why Counting Sort is commonly used inside Radix Sort.
+
+Mistake 4: Incorrect pass counter
+You wrote:
+
+
+c
+printf("Pass %d: ",j);
+This prints the array index, not the digit pass number.
+
+You should track the pass separately.
+
+2. What is a frequency array?
+Let's understand this first because it is the foundation of Counting Sort.
+
+Suppose we have:
+
+
+c
+int arr[] = {2, 1, 2, 0, 1};
+We want to count how many times each number occurs.
+
+We create another array:
+
+
+c
+int count[10] = {0};
+Initially, every position contains zero.
+
+Now, traverse the original array and increment the corresponding position:
+
+
+c
+for(int i = 0; i < 5; i++)
+{
+    count[arr[i]]++;
+}
+The resulting frequency array is:
+
+Frequency array
+
+Index (digit)
+
+0
+
+1
+
+2
+
+3
+
+4
+
+Frequency
+
+1
+
+2
+
+2
+
+0
+
+0
+
+Remaining positions 5–9 also contain zero.
+
+What does this tell us?
+
+0 occurs once.
+
+1 occurs twice.
+
+2 occurs twice.
+
+3 occurs zero times.
+
+4 occurs zero times.
+
+That's a frequency array!
+
+3. Why do we need this in Radix Sort?
+When sorting by a particular digit, we only have ten possible values:
+
+0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+
+Counting Sort uses a frequency array to organize these digits.
+
+It then uses cumulative counts and an output array to place the original numbers in the correct order while preserving stability.
+
+That's the key idea behind Radix Sort.
+
+4. Let's learn this interactively
+Before returning to your Radix Sort implementation, I want you to understand frequency counting.
+
+Given:
+
+
+c
+int arr[] = {3, 1, 3, 2, 1, 3};
+int count[4] = {0};
+What will be the final contents of count after executing:
+
+
+c
+for(int i = 0; i < 6; i++)
+{
+    count[arr[i]]++;
+}
+Try answering:
+
+count[0] = ?
+
+count[1] = ?
+
+count[2] = ?
+
+count[3] = ?
+
+We'll build your understanding of Counting Sort one step at a time, then come back and complete your Radix Sort program. No need to rush!
+
+
+is it possible to use any other sorting method for radix sort? like any of the ones i have studied till nw?
+
+Yes! In fact, you can use a sorting algorithm you've already studied to sort the digits in Radix Sort.
+
+However, there's one important condition: the sorting algorithm must be stable.
+
+A stable sorting algorithm preserves the relative order of elements that have equal values.
+
+Which of your studied algorithms can you use?
+Sorting algorithm
+
+Stable?
+
+Suitable?
+
+Bubble Sort
+
+Yes
+
+Yes
+
+Insertion Sort
+
+Yes
+
+Yes
+
+Selection Sort
+
+Generally no
+
+No
+
+Merge Sort
+
+Yes
+
+Yes
+
+Quick Sort
+
+Generally no
+
+No
+
+Heap Sort
+
+No
+
+No
+
+What would I recommend?
+Since you've already studied Bubble Sort and Insertion Sort, you can use either.
+
+I'd recommend Insertion Sort for learning purposes.
+
+But there's a catch: you must sort based on the particular digit, not the entire number.
+
+For example, consider:
+
+31, 12, 23, 14, 25
+
+For the units digit, you compare:
+
+1, 2, 3, 4, 5
+
+For the tens digit, you compare:
+
+3, 1, 2, 1, 2
+
+And your sorting must remain stable.
+
+One question for you
+Suppose we have:
+
+21, 11, 31
+
+We're sorting by the units digit.
+
+After sorting, what should the array look like?
+
+Think about why stability matters here.
+
+
+21,11,31
+
+Correct!
+Exactly: 21, 11, 31.
+
+Why?
+
+All three numbers have the same units digit (1).
+
+A stable sorting algorithm preserves their original relative order.
+
+Now let's move one step further.
+
+Suppose we have:
+
+21, 11, 31, 12, 22
+
+After sorting by the units digit, what will the array look like?
+
+Remember: preserve the original order of numbers having the same units digit.
+
+
+21,11,31,12,22
+
+Absolutely correct!
+The units digits are:
+
+Number
+
+Units digit
+
+21
+
+1
+
+11
+
+1
+
+31
+
+1
+
+12
+
+2
+
+22
+
+2
+
+So the result is:
+
+21, 11, 31, 12, 22
+
+Notice that the relative order within each group is preserved. That's stability!
+
+Next challenge
+Now perform the tens-digit pass on:
+
+21, 11, 31, 12, 22
+
+What will the resulting array be?
+
+(Remember, we're using a stable sorting algorithm.)
+
+
+#include <stdio.h>
+void radixSort(int arr[], int n)
+{
+    int max=arr[0],i=0,j=0,k=0,temp=0,c=0;
+    for(i=0;i<n;i++)
+    {
+        if(arr[i]>max)
+        {
+            max=arr[i];
+        }
+    }
+    while(max!=0)
+    {
+        c++;
+        max=max/10;
+    }
+    for(i=1;i<=c;i++)
+    {
+        for(j=0;j<n;j++)
+        {
+            for(k=0;k<n-j-1;k++)
+            {
+                if(((arr[k])%(10*i))>((arr[k+1])%(10*i)))
+                {
+                    temp=arr[k];
+                    arr[k]=arr[k+1];
+                    arr[k+1]=temp;
+                }
+            }
+        }
+        printf("Pass %d: ",i);
+        for(j=0;j<n;j++)
+        {
+            printf("%d, ",arr[j]);
+        }
+        printf("\n");
+    }
+}
+int main()
+{
+    int n=0,i=0;
+    printf("Enter no of elements: ");
+    scanf("%d",&n);
+    int arr[n];
+    for(i=0;i<n;i++)
+    {
+        printf("Enter element: ");
+        scanf("%d",&arr[i]);
+    }
+    radixSort(arr,n);
+    return 0;
+}
+
+
+how about this?
+
+You're getting closer! And I like that you've tried implementing Radix Sort using Bubble Sort instead of immediately jumping into Counting Sort.
+
+However, your current implementation is not correct for Radix Sort. There are two important issues.
+
+1. Your digit comparison is incorrect
+You wrote:
+
+
+c
+if(((arr[k])%(10*i))>((arr[k+1])%(10*i)))
+Let's examine what this does.
+
+For i = 1:
+
+
+c
+arr[k] % 10
+This correctly extracts the units digit.
+
+For i = 2:
+
+
+c
+arr[k] % 100
+This extracts the last TWO digits, not just the tens digit.
+
+For example:
+
+321 % 10 = 1
+
+321 % 100 = 21
+
+321 % 1000 = 321
+
+But Radix Sort needs to compare individual digits.
+
+You need to extract the digit at the current position using:
+
+
+c
+(arr[k] / place) % 10
+Where place is:
+
+1 for units
+
+10 for tens
+
+100 for hundreds
+
+1000 for thousands
+
+2. Your Bubble Sort implementation is fine!
+This part:
+
+
+c
+for(j=0;j<n;j++)
+{
+    for(k=0;k<n-j-1;k++)
+    {
+        if(...)
+        {
+            // swap
+        }
+    }
+}
+Bubble Sort is stable, provided you swap only when the left digit is strictly greater than the right digit.
+
+So you can absolutely retain this logic.
+
+3. Your corrected comparison
+Replace your existing condition with:
+
+
+c
+if(((arr[k]/place)%10) > ((arr[k+1]/place)%10))
+Also, you'll need to maintain place separately and multiply it by 10 after each pass.
+
+Your next task
+I don't want to give you the entire corrected program just yet. You've already figured out most of it.
+
+Try answering these two questions:
+
+How would you initialize place for the first pass?
+
+What statement would you execute after each pass to move from units to tens, tens to hundreds, etc.?
+
+Once you get these, we'll finish your implementation together!
+
+
+#include <stdio.h>
+void radixSort(int arr[], int n)
+{
+    int max=arr[0],i=0,j=0,k=0,l=1,temp=0,c=0;
+    for(i=0;i<n;i++)
+    {
+        if(arr[i]>max)
+        {
+            max=arr[i];
+        }
+    }
+    while(max!=0)
+    {
+        c++;
+        max=max/10;
+    }
+    for(i=1;i<=c;i++)
+    {
+        for(j=0;j<n;j++)
+        {
+            for(k=0;k<n-j-1;k++)
+            {
+                if(((arr[k]/(l))%10)>((arr[k+1]/(l))%(10)))
+                {
+                    temp=arr[k];
+                    arr[k]=arr[k+1];
+                    arr[k+1]=temp;
+                }
+            }
+        }
+        printf("Pass %d: ",i);
+        for(j=0;j<n;j++)
+        {
+            printf("%d, ",arr[j]);
+        }
+        printf("\n");
+        l=l*10;
+    }
+}
+int main()
+{
+    int n=0,i=0;
+    printf("Enter no of elements: ");
+    scanf("%d",&n);
+    int arr[n];
+    for(i=0;i<n;i++)
+    {
+        printf("Enter element: ");
+        scanf("%d",&arr[i]);
+    }
+    radixSort(arr,n);
+    return 0;
+}
+
+Excellent! You're almost there. Your implementation is now logically correct for LSD Radix Sort using Bubble Sort for non-negative integers.
+
+There's just one minor inconsistency worth cleaning up.
+
+1. Your digit extraction
+You wrote:
+
+
+c
+if(((arr[k]/(l))%10)>((arr[k+1]/(l))%(10)))
+Both expressions are correct!
+
+However, I'd write them consistently:
+
+
+c
+if(((arr[k]/l)%10) > ((arr[k+1]/l)%10))
+2. Your place multiplier
+This is correct:
+
+
+c
+int l=1;
+And:
+
+
+c
+l=l*10;
+Your passes will therefore be:
+
+Pass
+
+l
+
+Digit extracted
+
+1
+
+1
+
+Units
+
+2
+
+10
+
+Tens
+
+3
+
+100
+
+Hundreds
+
+4
+
+1000
+
+Thousands
+
+3. One important observation
+Your Bubble Sort implementation is stable because you use > rather than >=.
+
+This is essential for Radix Sort!
+
+4. A few edge cases to consider
+Your current implementation assumes:
+
+All elements are non-negative.
+
+The array has at least one element.
+
+The maximum element is positive (all-zero arrays need special consideration, although no sorting passes are necessary).
+
+For now, that's perfectly fine for learning.
+
+Concept understood
+You've successfully implemented Radix Sort without using Counting Sort!
+
+One final exercise:
+
+Try sorting:
+
+
+c
+int arr[] = {170, 45, 75, 90, 802, 24, 2, 66};
+Run your program and observe all three passes.
+
+If the final result is:
+
+2, 24, 45, 66, 75, 90, 170, 802
+
+then your implementation is working correctly for this input.
+
+Great progress!
+
+
+#include <stdio.h>
+#include <stdlib.h>
+struct node{
+    int data;
+    struct node *next;
+};
+struct node *head=NULL;
+int z=0;
+struct node *createNode(int x)
+{
+    struct node *newnode=(struct node *)malloc(sizeof(struct node));
+    newnode->data=x;
+    newnode->next=NULL;
+    return newnode;
+}
+void insertNode(int x, int y)
+{
+    struct node *newnode=createNode(x);
+    newnode->data=x;
+    if(head==NULL)
+    {
+        head=newnode;
+        z++;
+    }
+    else if(y<2)
+    {
+        
+        newnode->next=head;
+        head=newnode;
+        z++;
+    }
+    else
+    {
+        struct node *temp=head;
+        int c=0;
+        while(temp->next!=NULL)
+        {
+            if(c==(y-1))
+            {
+                break;
+            }
+            temp=temp->next;
+            c++;
+        }
+        newnode->next=temp->next;
+        temp->next=newnode;
+        z++;
+    }
+}
+void display()
+{
+    struct node *temp=head;
+    while(temp!=NULL)
+    {
+        printf("%d, ",temp->data);
+        temp=temp->next;
+    }
+}
+int main()
+{
+    int i=0,c=0,v=0;
+    printf("Enter 1 to insert, 2 to display, 3 to exit\n");
+    while(1)
+    {
+        printf("Enter choice: ");
+        scanf("%d",&c);
+        if(c==1)
+        {
+            printf("Enter element: ");
+            scanf("%d",&v);
+            if(z==0)
+            {
+                insertNode(v,1);
+            }
+            else
+            {
+                if(z==1)
+                {
+                    printf("Enter  to insert element at; 1 for beginning, 2 for end: ");
+                }
+                else
+                {
+                    printf("Enter  to insert element at; 1 for beginning, %d for end, or any position inbetween 1 and %d: ",z+1,z+1);
+                }
+                scanf("%d",&i);
+                if(i==1)
+                {
+                    insertNode(v,1);
+                }
+                else{
+                    insertNode(v,i);
+                }
+            }
+        }
+        else if(c==2)
+        {
+            display();
+        }
+        else if(c==3)
+        {
+            printf("Exiting...");
+            break;
+        }
+        else
+        {
+            printf("Invalid input. Try again");
+        }
+    }
+}
+
+what's wrong with this program? why isn't insertion working properly?
+
+Your program is actually quite close! The main problem is in your position-based insertion logic, specifically how you're traversing the linked list.
+
+Let's debug it using an example.
+
+1. The main bug is here
+
+c
+struct node *temp=head;
+int c=0;
+while(temp->next!=NULL)
+{
+    if(c==(y-1))
+    {
+        break;
+    }
+    temp=temp->next;
+    c++;
+}
+Let's say your linked list is:
+
+10 → 20 → 30
+
+And you want to insert 25 at position 3.
+
+Your traversal works as follows:
+
+Iteration
+
+c
+
+temp->data
+
+1
+
+0
+
+10
+
+2
+
+1
+
+20
+
+3
+
+2
+
+30
+
+But your condition is:
+
+
+c
+c == (y-1)
+For position 3, that means c == 2.
+
+You actually want to stop at position 2 (the node immediately before the insertion position).
+
+Your current code has an off-by-one error.
+
+2. Another issue: invalid positions
+Suppose the linked list contains three nodes and the user enters position 10.
+
+Your code will simply reach the last node and insert there.
+
+It should reject invalid positions instead.
+
+3. Corrected insertNode()
+Assuming positions start from 1, replace your function with this:
+
+
+c
+void insertNode(int x, int y)
+{
+    if(y < 1 || y > z + 1)
+    {
+        printf("Invalid position!\n");
+        return;
+    }
+
+    struct node *newnode = createNode(x);
+
+    if(y == 1)
+    {
+        newnode->next = head;
+        head = newnode;
+    }
+    else
+    {
+        struct node *temp = head;
+
+        for(int i = 1; i < y-1; i++)
+        {
+            temp = temp->next;
+        }
+
+        newnode->next = temp->next;
+        temp->next = newnode;
+    }
+
+    z++;
+}
+Notice how much simpler this is!
+
+4. Understand the traversal
+Consider:
+
+Original linked list
+
+10
+
+20
+
+30
+
+Insert 25 at position 3
+
+We stop at position 2 (node 20).
+
+10
+20
+25
+30
+Insertion complete
+The important operations are:
+
+
+c
+newnode->next = temp->next;
+temp->next = newnode;
+Always connect the new node to the remaining list before connecting the previous node to the new node.
+
+Otherwise, you risk losing access to the remaining nodes.
+
+5. Two smaller improvements
+In display(), print a newline after displaying the list.
+
+Your malloc() should be checked to ensure allocation succeeded.
+
+Test your understanding
+One question before we move on.
+
+Suppose the linked list is:
+
+10 → 20 → 30 → 40
+
+You want to insert 25 at position 3.
+
+Which node should temp point to immediately before performing the two pointer assignments?
+
+A. 10
+
+B. 20
+
+C. 30
+
+D. 40
+
+Think about it!
+
+
+so what is wrong with my while loop, should i just put c=1, then check if c==y?
+
+Yes! That's a perfectly valid way to approach it. You're thinking in the right direction.
+
+But remember: you need to stop at the node immediately BEFORE the insertion position.
+
+Let's modify your existing loop with minimal changes.
+
+
+c
+struct node *temp = head;
+int c = 1;
+
+while(temp->next != NULL)
+{
+    if(c == y-1)
+    {
+        break;
+    }
+
+    temp = temp->next;
+    c++;
+}
+Why c = 1 and c == y-1?
+Suppose the list is:
+
+10 → 20 → 30 → 40
+
+You want to insert at position 3.
+
+c
+
+temp->data
+
+Condition c == y-1
+
+1
+
+10
+
+False
+
+2
+
+20
+
+True — stop!
+
+Now temp points to 20, exactly where we want it.
+
+Your existing pointer assignments can remain unchanged:
+
+
+c
+newnode->next = temp->next;
+temp->next = newnode;
+One important thing: You should still validate y before entering the loop, otherwise invalid positions can cause incorrect insertions.
+
+You're getting the hang of linked-list pointer manipulation!
+
+
+#include <stdio.h>
+#include <stdlib.h>
+struct node{
+    int exp;
+    int coeff;
+    struct node *next;
+};
+struct node *p1=NULL;
+struct node *p2=NULL;
+struct node *createNode(int x, int y)
+{
+    struct node *newnode=(struct node *)malloc(sizeof(struct node));
+    newnode->coeff=x;
+    newnode->exp=y;
+    newnode->next=NULL;
+    return newnode;
+}
+void insertNode(struct node *p, int x, int y)
+{
+    struct node *newnode=createNode(x,y);
+    if(p==NULL)
+    {
+        p=newnode;
+    }
+    else
+    {
+        struct node *temp=p;
+        while(temp->next!=NULL)
+        {
+            temp=temp->next;
+        }
+        temp->next=newnode;
+    }
+}
+void display(struct node *head)
+{
+    struct node *temp=head;
+    while(temp!=NULL)
+    {
+        printf("%dx^%d",temp->coeff,temp->exp);
+        if(temp->next!=NULL)
+        {
+            printf("+");
+        }
+    }
+}
+struct node *sum(struct node *p1, struct node *p2)
+{
+    struct node *i=p1;
+    struct node *j=p2;
+    struct node *k=NULL;
+    while(i!=NULL && j!=NULL)
+    {
+        if(i->exp==j->exp)
+        {
+            insertNode(k,(i->coeff+j->coeff),i->exp);
+            i=i->next;
+            j=j->next;
+        }
+        if(i->exp>j->exp)
+        {
+            insertNode(k,i->coeff,i->exp);
+            i=i->next;
+        }
+        if(i->exp<j->exp)
+        {
+            insertNode(k,j->coeff,j->exp);
+            j=j->next;
+        }
+    }
+    while(i!=NULL)
+    {
+        insertNode(k,i->coeff,i->exp);
+        i=i->next;
+    }
+    while(j!=NULL)
+    {
+        insertNode(k,j->coeff,j->exp);
+    }
+    return k;
+}
+int main()
+{
+    int n1=0,n2=0,i=0,x=0,y=0;
+    printf("Enter no of elements of polynomial 1: ");
+    scanf("%d",&n1);
+    for(i=0;i<n1;i++)
+    {
+        printf("Enter exponent: ");
+        scanf("%d",&x);
+        printf("Enter coefficient: ");
+        scanf("%d",&y);
+        insertNode(p1,x,y);
+    }
+    printf("Enter no of elements of polynomial 2: ");
+    scanf("%d",&n2);
+    for(i=0;i<n1;i++)
+    {
+        printf("Enter exponent: ");
+        scanf("%d",&x);
+        printf("Enter coefficient: ");
+        scanf("%d",&y);
+        insertNode(p2,x,y);
+    }
+    printf("Polynomial 1: ");
+    display(p1);
+    printf("\n");
+    printf("Polynomial 2: ");
+    display(p2);
+    printf("\n");
+    struct node *sp=sum(p1,p2);
+    printf("Sum Polynomial: ");
+    display(sp);
+    printf("\n");
+    return 0;
+}
+
+You've moved on to polynomial addition using linked lists! Nice.
+
+There are several issues in your program. Some are pointer-related, while others are logical errors. Let's debug them one by one rather than rewriting the entire program.
+
+1. Major issue: insertNode() cannot modify your head pointer
+Your function:
+
+
+c
+void insertNode(struct node *p, int x, int y)
+{
+    struct node *newnode=createNode(x,y);
+    if(p==NULL)
+    {
+        p=newnode;
+    }
+    ...
+}
+The problem is that p is passed by value.
+
+When you do:
+
+
+c
+p = newnode;
+You modify only the local copy of the pointer. Your global p1 or p2 remains NULL.
+
+Solution: Pass the address of the head pointer.
+
+Change the function declaration to:
+
+
+c
+void insertNode(struct node **p, int x, int y)
+And inside the function, use:
+
+
+c
+if(*p == NULL)
+{
+    *p = newnode;
+}
+else
+{
+    struct node *temp = *p;
+    // remaining traversal logic
+}
+When calling it:
+
+
+c
+insertNode(&p1, x, y);
+insertNode(&p2, x, y);
+The same applies when inserting into your sum polynomial.
+
+2. Your display() function has an infinite loop
+Look at this:
+
+
+c
+while(temp!=NULL)
+{
+    printf("%dx^%d",temp->coeff,temp->exp);
+    if(temp->next!=NULL)
+    {
+        printf("+");
+    }
+}
+You're missing:
+
+
+c
+temp = temp->next;
+Without this, temp never changes, so the loop continues indefinitely.
+
+3. Your sum() function has a logical problem
+Consider:
+
+
+c
+if(i->exp==j->exp)
+{
+    insertNode(k,(i->coeff+j->coeff),i->exp);
+    i=i->next;
+    j=j->next;
+}
+if(i->exp>j->exp)
+You have used three independent if statements.
+
+This is problematic because after the first if, you advance i and j. The next if statements then compare the newly advanced nodes.
+
+Hint: Use if, else if, and else.
+
+The three possibilities are:
+
+Equal exponents: Add coefficients and advance both pointers.
+
+First exponent is greater: Copy the first term and advance i.
+
+Second exponent is greater: Copy the second term and advance j.
+
+Also, ensure your terms are entered in descending order of exponents.
+
+4. Your second polynomial input loop has a mistake
+You wrote:
+
+
+c
+for(i=0;i<n1;i++)
+When entering polynomial 2, you should use n2, not n1.
+
+Otherwise, you might enter too few or too many terms.
+
+5. Your last while loop causes an infinite loop
+You wrote:
+
+
+c
+while(j!=NULL)
+{
+    insertNode(k,j->coeff,j->exp);
+}
+You're missing:
+
+
+c
+j = j->next;
+Without advancing j, you'll keep inserting the same term indefinitely.
+
+6. Summary of the errors
+Location
+
+Problem
+
+Correction
+
+insertNode()
+
+Head pointer passed by value
+
+Use double pointer
+
+display()
+
+Missing pointer advancement
+
+temp = temp->next
+
+sum()
+
+Independent if statements
+
+Use if-else if-else
+
+Main, polynomial 2
+
+Wrong loop limit
+
+Use n2
+
+sum() last while
+
+Missing pointer advancement
+
+j = j->next
+
+7. Let's test your understanding
+Before you correct the entire program, I want to check one important pointer concept.
+
+Suppose:
+
+
+c
+struct node *head = NULL;
+And you call:
+
+
+c
+void insertNode(struct node *p)
+{
+    p = malloc(sizeof(struct node));
+}
+Why does head remain NULL even after memory has been allocated?
+
+A. Because malloc() failed.
+
+B. Because p is a local copy of head.
+
+C. Because pointers cannot be passed to functions.
+
+D. Because head must be declared globally.
+
+Think about this one. Understanding it will make linked-list operations involving insertion, deletion, and polynomial manipulation much easier.
+
+
+#include <stdio.h>
+#include <stdlib.h>
+struct node{
+    int exp;
+    int coeff;
+    struct node *next;
+};
+struct node *p1=NULL;
+struct node *p2=NULL;
+struct node *p3=NULL;
+struct node *createNode(int x, int y)
+{
+    struct node *newnode=(struct node *)malloc(sizeof(struct node));
+    newnode->coeff=x;
+    newnode->exp=y;
+    newnode->next=NULL;
+    return newnode;
+}
+void insertNode(struct node *p, int x, int y)
+{
+    struct node *newnode=createNode(x,y);
+    if(p==NULL)
+    {
+        p=newnode;
+    }
+    else
+    {
+        struct node *temp=p;
+        while(temp->next!=NULL)
+        {
+            temp=temp->next;
+        }
+        temp->next=newnode;
+    }
+}
+void display(int x)
+{
+    if(x==1)
+    {
+        struct node *temp=p1;
+        while(temp!=NULL)
+        {
+            printf("%dx^%d",temp->coeff,temp->exp);
+            if(temp->next!=NULL)
+            {
+                printf("+");
+            }
+            temp=temp->next;
+        }
+    }
+    if(x==2)
+    {
+        struct node *temp=p2;
+        while(temp!=NULL)
+        {
+            printf("%dx^%d",temp->coeff,temp->exp);
+            if(temp->next!=NULL)
+            {
+                printf("+");
+            }
+            temp=temp->next;
+        }
+    }
+    if(x==3)
+    {
+        struct node *temp=p3;
+        while(temp!=NULL)
+        {
+            printf("%dx^%d",temp->coeff,temp->exp);
+            if(temp->next!=NULL)
+            {
+                printf("+");
+            }
+            temp=temp->next;
+        }
+    }
+}
+void sum(struct node *p1, struct node *p2)
+{
+    struct node *i=p1;
+    struct node *j=p2;
+    while(i!=NULL && j!=NULL)
+    {
+        if(i->exp==j->exp)
+        {
+            insertNode(p3,(i->coeff+j->coeff),i->exp);
+            i=i->next;
+            j=j->next;
+        }
+        else if(i->exp>j->exp)
+        {
+            insertNode(p3,i->coeff,i->exp);
+            i=i->next;
+        }
+        else
+        {
+            insertNode(p3,j->coeff,j->exp);
+            j=j->next;
+        }
+    }
+    while(i!=NULL)
+    {
+        insertNode(p3,i->coeff,i->exp);
+        i=i->next;
+    }
+    while(j!=NULL)
+    {
+        insertNode(p3,j->coeff,j->exp);
+        j=j->next;
+    }
+}
+int main()
+{
+    int n1=0,n2=0,i=0,x=0,y=0;
+    printf("Enter no of elements of polynomial 1: ");
+    scanf("%d",&n1);
+    for(i=0;i<n1;i++)
+    {
+        printf("Enter exponent: ");
+        scanf("%d",&x);
+        printf("Enter coefficient: ");
+        scanf("%d",&y);
+        insertNode(p1,x,y);
+    }
+    printf("Enter no of elements of polynomial 2: ");
+    scanf("%d",&n2);
+    for(i=0;i<n2;i++)
+    {
+        printf("Enter exponent: ");
+        scanf("%d",&x);
+        printf("Enter coefficient: ");
+        scanf("%d",&y);
+        insertNode(p2,x,y);
+    }
+    printf("Polynomial 1: ");
+    display(1);
+    printf("\n");
+    printf("Polynomial 2: ");
+    display(2);
+    printf("\n");
+    sum(p1,p2);
+    printf("Sum Polynomial: ");
+    display(3);
+    printf("\n");
+    return 0;
+}
+
+Your sum() logic is now much better! You've fixed the independent if statements, corrected the second input loop, and added pointer advancement in the final loops.
+
+However, your program still has one major problem: insertNode().
+
+1. The head pointer problem is still present
+You have:
+
+
+c
+void insertNode(struct node *p, int x, int y)
+And:
+
+
+c
+if(p==NULL)
+{
+    p=newnode;
+}
+Remember, p is a local copy of the pointer.
+
+Let's see what happens when you execute:
+
+
+c
+insertNode(p1, x, y);
+Initially:
+
+p1 = NULL
+
+p = NULL
+
+A new node is created.
+
+p = newnode
+
+But p1 remains NULL!
+
+Consequently, your three polynomial lists never get their first nodes.
+
+Fix
+Use a double pointer:
+
+
+c
+void insertNode(struct node **p, int x, int y)
+{
+    struct node *newnode = createNode(x,y);
+
+    if(*p == NULL)
+    {
+        *p = newnode;
+    }
+    else
+    {
+        struct node *temp = *p;
+
+        while(temp->next != NULL)
+        {
+            temp = temp->next;
+        }
+
+        temp->next = newnode;
+    }
+}
+And change your function calls:
+
+
+c
+insertNode(&p1, x, y);
+insertNode(&p2, x, y);
+insertNode(&p3, i->coeff, i->exp);
+Do this for every call to insertNode().
+
+2. Your polynomial addition algorithm
+This part is now logically correct, assuming both input polynomials are arranged in descending order of exponents.
+
+For example:
+
+Polynomial 1
+
+5
+x
+3
++
+4
+x
+2
++
+2
+x
+0
+5x 
+3
+ +4x 
+2
+ +2x 
+0
+ 
+
+Polynomial 2
+
+3
+x
+4
++
+2
+x
+3
++
+7
+x
+1
+3x 
+4
+ +2x 
+3
+ +7x 
+1
+ 
+
+Expected result
+
+3
+x
+4
++
+7
+x
+3
++
+4
+x
+2
++
+7
+x
+1
++
+2
+x
+0
+3x 
+4
+ +7x 
+3
+ +4x 
+2
+ +7x 
+1
+ +2x 
+0
+ 
+
+Your three cases handle this correctly:
+
+Equal exponents → Add coefficients.
+
+First exponent greater → Copy first polynomial's term.
+
+Second exponent greater → Copy second polynomial's term.
+
+One additional improvement: if two coefficients add up to zero, you can skip inserting that term.
+
+3. One more thing to improve
+Your createNode() should check whether malloc() succeeded:
+
+
+c
+struct node *newnode = malloc(sizeof(struct node));
+
+if(newnode == NULL)
+{
+    printf("Memory allocation failed!\n");
+    exit(1);
+}
+4. Test your understanding
+I want to check whether you've understood the double-pointer concept.
+
+Consider:
+
+
+c
+void change(int **p)
+{
+    *p = malloc(sizeof(int));
+    **p = 50;
+}
+And:
+
+
+c
+int *ptr = NULL;
+change(&ptr);
+After executing change(&ptr), what is the value of *ptr?
+
+A. NULL
+
+B. 0
+
+C. 50
+
+D. Compilation error
+
+Once you get this, we'll move on to polynomial addition's edge cases.
+
+
+#include <stdio.h>
+#include <stdlib.h>
+struct node{
+    int exp;
+    int coeff;
+    struct node *next;
+};
+struct node *p1=NULL;
+struct node *p2=NULL;
+struct node *p3=NULL;
+struct node *createNode(int x, int y)
+{
+    struct node *newnode=(struct node *)malloc(sizeof(struct node));
+    newnode->coeff=x;
+    newnode->exp=y;
+    newnode->next=NULL;
+    return newnode;
+}
+void insertNode(struct node **p, int x, int y)
+{
+    struct node *newnode=createNode(x,y);
+    if(*p==NULL)
+    {
+        *p=newnode;
+    }
+    else
+    {
+        struct node *temp=*p;
+        while(temp->next!=NULL)
+        {
+            temp=temp->next;
+        }
+        temp->next=newnode;
+    }
+}
+void display(struct node *head)
+{
+    struct node *temp=head;
+    while(temp!=NULL)
+    {
+        printf("%dx^%d",temp->coeff,temp->exp);
+        if(temp->next!=NULL)
+        {
+            printf("+");
+        }
+        temp=temp->next;
+    }
+}
+void sum(struct node *p1, struct node *p2)
+{
+    struct node *i=p1;
+    struct node *j=p2;
+    while(i!=NULL && j!=NULL)
+    {
+        if(i->exp==j->exp)
+        {
+            insertNode(p3,(i->coeff+j->coeff),i->exp);
+            i=i->next;
+            j=j->next;
+        }
+        else if(i->exp>j->exp)
+        {
+            insertNode(p3,i->coeff,i->exp);
+            i=i->next;
+        }
+        else
+        {
+            insertNode(p3,j->coeff,j->exp);
+            j=j->next;
+        }
+    }
+    while(i!=NULL)
+    {
+        insertNode(p3,i->coeff,i->exp);
+        i=i->next;
+    }
+    while(j!=NULL)
+    {
+        insertNode(p3,j->coeff,j->exp);
+        j=j->next;
+    }
+}
+int main()
+{
+    int n1=0,n2=0,i=0,x=0,y=0;
+    printf("Enter no of elements of polynomial 1: ");
+    scanf("%d",&n1);
+    for(i=0;i<n1;i++)
+    {
+        printf("Enter exponent: ");
+        scanf("%d",&x);
+        printf("Enter coefficient: ");
+        scanf("%d",&y);
+        insertNode(p1,x,y);
+    }
+    printf("Enter no of elements of polynomial 2: ");
+    scanf("%d",&n2);
+    for(i=0;i<n2;i++)
+    {
+        printf("Enter exponent: ");
+        scanf("%d",&x);
+        printf("Enter coefficient: ");
+        scanf("%d",&y);
+        insertNode(p2,x,y);
+    }
+    printf("Polynomial 1: ");
+    display(p1);
+    printf("\n");
+    printf("Polynomial 2: ");
+    display(p2);
+    printf("\n");
+    sum(p1,p2);
+    printf("Sum Polynomial: ");
+    display(p3);
+    printf("\n");
+    return 0;
+}
+
+You're very close! Your insertNode() function is now correctly implemented using a double pointer (struct node **p). However, you've missed one important thing.
+
+There is one major error in your current program.
+
+1. You're not passing the address of the head pointer
+Your function is declared as:
+
+
+c
+void insertNode(struct node **p, int x, int y)
+Therefore, it expects the address of a pointer.
+
+But in main() and sum(), you're calling it like this:
+
+
+c
+insertNode(p1,x,y);
+insertNode(p2,x,y);
+insertNode(p3,x,y);
+These are ordinary pointers, not addresses of pointers.
+
+You need to use &:
+
+
+c
+insertNode(&p1,x,y);
+insertNode(&p2,x,y);
+insertNode(&p3,x,y);
+Make this change in all three places.
+
+2. Your polynomial addition logic
+Your sum() function is logically correct, provided both input polynomials are arranged in descending order of exponents.
+
+For example:
+
+P
+1
+=
+5
+x
+3
++
+4
+x
+2
++
+2
+x
+P 
+1
+​
+ =5x 
+3
+ +4x 
+2
+ +2x
+P
+2
+=
+3
+x
+4
++
+2
+x
+3
++
+6
+P 
+2
+​
+ =3x 
+4
+ +2x 
+3
+ +6
+Your merging logic will produce:
+
+P
+3
+=
+3
+x
+4
++
+7
+x
+3
++
+4
+x
+2
++
+2
+x
++
+6
+P 
+3
+​
+ =3x 
+4
+ +7x 
+3
+ +4x 
+2
+ +2x+6
+One small improvement: you could skip inserting a term when the resulting coefficient is zero.
+
+3. One more thing to remember
+Your createNode() function currently uses:
+
+
+c
+newnode->coeff=x;
+newnode->exp=y;
+And you call it using:
+
+
+c
+insertNode(&p1,x,y);
+where x is the exponent and y is the coefficient.
+
+So you're actually storing them in reverse!
+
+Change the assignments in createNode() to:
+
+
+c
+newnode->coeff=y;
+newnode->exp=x;
+Overall assessment
+You're making good progress with linked lists. You've now worked with:
+
+Dynamic node creation using malloc().
+
+Insertion at the end of a linked list.
+
+Passing head pointers using double pointers.
+
+Traversing two linked lists simultaneously.
+
+Merging two sorted linked lists to perform polynomial addition.
+
+A question to test your understanding:
+
+Why do we need struct node **p in insertNode() instead of simply using struct node *p?
+
+Try explaining it in your own words.
+
+
+what if i used *p and &x?
+
+Good question! But *p and &x do two completely different things, and neither is a direct replacement for &p1.
+
+Let's understand using your insertNode() function.
+
+
+c
+void insertNode(struct node **p, int x, int y)
+Suppose you call:
+
+
+c
+insertNode(&p1, x, y);
+Inside the function:
+
+p contains the address of p1.
+
+*p represents the actual pointer p1.
+
+**p would represent the actual node structure (if *p is not NULL).
+
+What happens if you use *p?
+Consider:
+
+
+c
+if(*p == NULL)
+{
+    *p = newnode;
+}
+This is correct!
+
+Here, you're changing the original head pointer because p contains its address.
+
+If you had used only struct node *p, assigning p = newnode would change only the local copy.
+
+What about &x?
+&x means the address of the integer variable x.
+
+For example:
+
+
+c
+int x = 10;
+int *p = &x;
+Here, p stores the address of x, while *p gives you its value (10).
+
+It has nothing to do with the linked-list head pointer.
+
+Quick test
+Suppose we have:
+
+
+c
+struct node *head = NULL;
+And our function is:
+
+
+c
+void insertNode(struct node **p)
+Which of these calls is correct?
+
+Choose the correct answer.
+
+
+insertNode(*head);
+
+
+insertNode(&head);
+
+
+insertNode(head);
+
+
+insertNode(&*head);
+
+Correct!Exactly! We pass the address of head so the function can modify the original pointer.
+
+
+#include <stdio.h>
+#include <ctype.h>
+char stack[10];
+int top=-1;
+int max=10;
+void push(char x)
+{
+    if(top==(max-1))
+    {
+        printf("Stack overflow");
+    }
+    else
+    {
+        stack[top++]=x;
+    }
+}
+char pop()
+{
+    if(top==0)
+    {
+        printf("Stack underflow");
+        return 0;
+    }
+    else
+    {
+        char x=stack[top];
+        top--;
+        return x;
+    }
+}
+int peek()
+{
+    return stack[top];
+}
+int prec(char x)
+{
+    if(x=="^")
+    {
+        return 3;
+    }
+    else if(x=="*" || x=="/")
+    {
+        return 2;
+    }
+    else if(x=="+" || x=="-")
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+int main()
+{
+    stack[top++]='#';
+    int n=0,i=0,j=0;
+    printf("Enter length of string: ");
+    scanf("%d",&n);
+    char is[n+1];
+    char ps[n+1];
+    is[n]='\0';
+    ps[n]='\0';
+    printf("Enter string: ");
+    scanf("%s",&is);
+    for(i=0;i<n;i++)
+    {
+        if(isalnum(is[i]))
+        {
+            ps[j++]=is[i];
+        }
+        else if(is[i]=="(")
+        {
+            push(is[i]);
+        }
+        else if(is[i]==")")
+        {
+            while(1)
+            {
+                char x=pop();
+                if(x=="(")
+                {
+                    ps[j++]=x;
+                    break;
+                }
+                else
+                {
+                    ps[j++]=pop();
+                }
+            }
+        }
+        else
+        {
+            while(prec(is[i])>prec(peek()))
+            {
+                ps[j++]=pop();
+            }
+        }
+    }
+    printf("Postfix expression: %s",ps);
+    return 0;
+}
+
+Good! You're now working on infix to postfix conversion using a stack. Your overall approach is on the right track, but there are several errors in your implementation.
+
+I'll point them out without rewriting the entire program, so you can fix it yourself.
+
+1. Your push() function has an indexing error
+You wrote:
+
+
+c
+stack[top++]=x;
+Remember that initially top = -1.
+
+With this statement, the first insertion happens at stack[-1], which is invalid!
+
+You need to increment top before inserting.
+
+
+c
+stack[++top]=x;
+2. Your pop() function has two errors
+You wrote:
+
+
+c
+if(top==0)
+An empty stack has top == -1, not top == 0.
+
+Also:
+
+
+c
+char x=stack[top];
+This part is correct only if top points to the current top element.
+
+Once you fix push(), this will work correctly.
+
+3. You're comparing characters incorrectly
+This is a very important C concept.
+
+You wrote:
+
+
+c
+if(x=="^")
+But x is a character, whereas "^" is a string literal.
+
+Use single quotes for characters:
+
+
+c
+if(x=='^')
+Apply the same correction throughout your program:
+
+Incorrect
+
+Correct
+
+"^"
+
+'^'
+
+"*"
+
+'*'
+
+"/"
+
+'/'
+
+"+"
+
+'+'
+
+"-"
+
+'-'
+
+"("
+
+'('
+
+")"
+
+')'
+
+4. Your initial stack insertion is incorrect
+You wrote:
+
+
+c
+stack[top++]='#';
+This has the same indexing problem as your push() function.
+
+Instead, use your push() function to insert '#'.
+
+5. Your closing bracket logic is incorrect
+You wrote:
+
+
+c
+char x=pop();
+if(x=="(")
+{
+    ps[j++]=x;
+    break;
+}
+else
+{
+    ps[j++]=pop();
+}
+There are two problems:
+
+You're comparing with a string instead of a character.
+
+You're popping twice when you should only pop once.
+
+Also, you should not insert the opening parenthesis into the postfix expression.
+
+Think about what should happen when you encounter ):
+
+Pop an operator.
+
+If it's (, stop.
+
+Otherwise, append the popped operator to postfix.
+
+6. Your operator precedence logic is incomplete
+You wrote:
+
+
+c
+while(prec(is[i])>prec(peek()))
+{
+    ps[j++]=pop();
+}
+Think carefully about this condition.
+
+Suppose your infix expression is:
+
+
+text
+A+B*C
+When you encounter *, should you pop +?
+
+No!
+
+But consider:
+
+
+text
+A*B+C
+When you encounter +, should you pop *?
+
+Yes!
+
+Your condition currently does the opposite of what you need.
+
+You should compare the precedence of the incoming operator with the operator already on the stack.
+
+Also remember:
+
+^ is right-associative.
+
+*, /, +, and - are left-associative.
+
+This matters when operators have equal precedence.
+
+7. You're missing the final stack-emptying loop
+After processing the entire infix expression, you must pop all remaining operators and append them to postfix.
+
+Otherwise, some operators will never reach your output.
+
+Your debugging challenge
+Before changing your code, answer these three questions:
+
+If top = -1, what should top become after the first push()?
+
+For the expression A*B+C, when you encounter +, which operator should be popped first?
+
+Once the entire infix expression has been scanned, why must we empty the remaining stack?
+
+Try answering these first. Then modify your program and send me your next version. I'll review it just as we've been doing with your sorting and linked-list programs.
+
+
+#include <stdio.h>
+#include <ctype.h>
+char stack[10];
+int top=0;
+int max=10;
+void push(char x)
+{
+    if(top==(max-1))
+    {
+        printf("Stack overflow");
+    }
+    else
+    {
+        stack[top++]=x;
+    }
+}
+char pop()
+{
+    if(top==0)
+    {
+        printf("Stack underflow");
+        return 0;
+    }
+    else
+    {
+        char x=stack[top];
+        top--;
+        return x;
+    }
+}
+int peek()
+{
+    return stack[top];
+}
+int prec(char x)
+{
+    if(x=='^')
+    {
+        return 3;
+    }
+    else if(x=='*' || x=='/')
+    {
+        return 2;
+    }
+    else if(x=='+' || x=='-')
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+int main()
+{
+    stack[top++]='#';
+    int n=0,i=0,j=0;
+    printf("Enter length of string: ");
+    scanf("%d",&n);
+    char is[n+1];
+    char ps[n+1];
+    is[n]='\0';
+    ps[n]='\0';
+    printf("Enter string: ");
+    scanf("%s",is);
+    for(i=0;i<n;i++)
+    {
+        if(isalnum(is[i]))
+        {
+            ps[j++]=is[i];
+        }
+        else if(is[i]=='(')
+        {
+            push(is[i]);
+        }
+        else if(is[i]==')')
+        {
+            while(1)
+            {
+                char x=pop();
+                if(x=='(')
+                {
+                    break;
+                }
+                else
+                {
+                    ps[j++]=x;
+                }
+            }
+        }
+        else
+        {
+            while(prec(is[i])<prec(peek()))
+            {
+                ps[j++]=pop();
+            }
+        }
+    }
+    while(peek()!='#')
+    {
+        ps[j++]=pop();
+    }
+    printf("Postfix expression: ");
+    printf("%s",ps);
+    return 0;
+}
+
+Much better! Your character comparisons are fixed, your parenthesis handling is improved, and you've added the final stack-emptying loop.
+
+However, there are still 4 important issues to fix.
+
+1. Your pop() function has an off-by-one error
+You currently have:
+
+
+c
+char x=stack[top];
+top--;
+But your push() function uses:
+
+
+c
+stack[top++]=x;
+This means top points to the next empty position after insertion, not the position of the top element.
+
+Therefore, change your pop() to:
+
+
+c
+char x=stack[--top];
+return x;
+Your peek() also needs correction:
+
+
+c
+return stack[top-1];
+2. Your operator precedence condition is incomplete
+Currently:
+
+
+c
+while(prec(is[i])<prec(peek()))
+This handles different precedence levels, but what happens when two operators have equal precedence?
+
+Consider:
+
+
+text
+A-B+C
+When you encounter +, the existing - must be popped because + and - are left-associative.
+
+Your condition doesn't handle this.
+
+You need to consider:
+
+Incoming operator has lower precedence: pop.
+
+Equal precedence and incoming operator is left-associative: pop.
+
+Incoming operator is ^ and precedence is equal: don't pop.
+
+3. You're not handling parentheses in the operator loop
+Consider:
+
+
+text
+A*(B+C)
+When you encounter *, your stack contains #.
+
+But when you encounter +, the stack contains (.
+
+Your precedence function returns zero for (, which is fine here, but you must ensure that your operator-processing loop never pops past an opening parenthesis.
+
+Include an explicit check for peek() != '('.
+
+4. Your postfix string needs a proper null terminator
+You wrote:
+
+
+c
+ps[n]='\0';
+But your postfix expression may contain fewer than n characters.
+
+After the conversion, explicitly terminate it:
+
+
+c
+ps[j]='\0';
+Let's test your understanding
+Before you modify the code, try this expression:
+
+Infix expression
+
+A+B*C-D
+What should its postfix expression be?
+
+ABC*+D-
+Correct!Excellent. You correctly handled operator precedence.
+
+One more thing: your stack implementation is now using a slightly different convention (top points to the next empty position). That's perfectly valid. Just be consistent across push(), pop() and peek().
+
+You're getting closer to implementing this independently!
+
+
+#include <stdio.h>
+#include <ctype.h>
+char stack[10];
+int top=0;
+int max=10;
+void push(char x)
+{
+    if(top==(max-1))
+    {
+        printf("Stack overflow");
+    }
+    else
+    {
+        stack[top++]=x;
+    }
+}
+char pop()
+{
+    if(top==0)
+    {
+        printf("Stack underflow");
+        return 0;
+    }
+    else
+    {
+        char x=stack[--top];
+        return x;
+    }
+}
+int peek()
+{
+    return stack[top-1];
+}
+int prec(char x)
+{
+    if(x=='^')
+    {
+        return 3;
+    }
+    else if(x=='*' || x=='/')
+    {
+        return 2;
+    }
+    else if(x=='+' || x=='-')
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+int main()
+{
+    stack[top++]='#';
+    int n=0,i=0,j=0;
+    printf("Enter length of string: ");
+    scanf("%d",&n);
+    char is[n+1];
+    char ps[n+1];
+    is[n]='\0';
+    ps[n]='\0';
+    printf("Enter string: ");
+    scanf("%s",is);
+    for(i=0;i<n;i++)
+    {
+        if(isalnum(is[i]))
+        {
+            ps[j++]=is[i];
+        }
+        else if(is[i]=='(')
+        {
+            push(is[i]);
+        }
+        else if(is[i]==')')
+        {
+            while(1)
+            {
+                char x=pop();
+                if(x=='(')
+                {
+                    break;
+                }
+                else
+                {
+                    ps[j++]=x;
+                }
+            }
+        }
+        else
+        {
+            while(prec(is[i])<prec(peek()))
+            {
+                ps[j++]=pop();
+            }
+        }
+    }
+    while(peek()!='#')
+    {
+        ps[j++]=pop();
+    }
+    printf("Postfix expression: ");
+    printf("%s",ps);
+    return 0;
+}
+
+Excellent! Your push(), pop(), and peek() functions are now consistent. You've fixed the off-by-one error correctly.
+
+However, your infix-to-postfix conversion still has 3 logical issues.
+
+1. Equal precedence is still not handled
+Your current condition:
+
+
+c
+while(prec(is[i])<prec(peek()))
+Consider:
+
+
+text
+A+B-C
+When you encounter -, the stack contains +.
+
+Both have precedence 1. Since + and - are left-associative, you must pop + before pushing -.
+
+Your current condition won't do that.
+
+2. You need to protect opening parentheses
+Your operator-processing loop should stop when it encounters ( on the stack.
+
+Otherwise, you risk popping an opening parenthesis when processing operators.
+
+3. Your stack overflow condition
+You wrote:
+
+
+c
+if(top==(max-1))
+Remember that top represents the next empty position.
+
+If top == 9, you can still insert an element at index 9.
+
+Your overflow condition should therefore be:
+
+
+c
+if(top==max)
+Let's do a quick dry run
+Consider:
+
+
+text
+A+B*C
+Here's what should happen:
+
+Scanned character
+
+Stack
+
+Postfix
+
+A
+
+#
+
+A
+
++
+
+# +
+
+A
+
+B
+
+# +
+
+AB
+
+*
+
+# + *
+
+AB
+
+C
+
+# + *
+
+ABC
+
+End
+
+#
+
+ABC*+
+
+Expected output
+ABC*+
+
+One important question
+Consider this expression:
+
+
+text
+A^B^C
+Exponentiation (^) is right-associative.
+
+What should its postfix expression be?
+
+A. AB^C^
+
+B. ABC^^
+
+Think about why the order matters. Don't modify your code yet. Let's make sure you understand associativity first.
+
+
+#include <stdio.h>
+#include <ctype.h>
+char stack[10];
+int top=0;
+int max=10;
+void push(char x)
+{
+    if(top==(max-1))
+    {
+        printf("Stack overflow");
+    }
+    else
+    {
+        stack[top++]=x;
+    }
+}
+char pop()
+{
+    if(top==0)
+    {
+        printf("Stack underflow");
+        return 0;
+    }
+    else
+    {
+        char x=stack[--top];
+        return x;
+    }
+}
+int peek()
+{
+    return stack[top-1];
+}
+int prec(char x)
+{
+    if(x=='^')
+    {
+        return 5;
+    }
+    else if(x=='*') 
+    {
+        return 4;
+    }
+    else if(x=='/')
+    {
+        return 3;
+    }
+    else if(x=='+')
+    {
+        return 2;
+    }
+    else if(x=='-')
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+int main()
+{
+    stack[top++]='#';
+    int n=0,i=0,j=0;
+    printf("Enter length of string: ");
+    scanf("%d",&n);
+    char is[n+1];
+    char ps[n+1];
+    is[n]='\0';
+    ps[n]='\0';
+    printf("Enter string: ");
+    scanf("%s",is);
+    for(i=0;i<n;i++)
+    {
+        if(isalnum(is[i]))
+        {
+            ps[j++]=is[i];
+        }
+        else if(is[i]=='(')
+        {
+            push(is[i]);
+        }
+        else if(is[i]==')')
+        {
+            while(1)
+            {
+                char x=pop();
+                if(x=='(')
+                {
+                    break;
+                }
+                else
+                {
+                    ps[j++]=x;
+                }
+            }
+        }
+        else
+        {
+            while(prec(is[i])<prec(peek()))
+            {
+                ps[j++]=pop();
+            }
+        }
+    }
+    while(peek()!='#')
+    {
+        ps[j++]=pop();
+    }
+    printf("Postfix expression: ");
+    printf("%s",ps);
+    return 0;
+}
+
+I see what you're trying to do! You've changed the precedence values so that every operator has a different priority. That's a clever attempt to handle equal precedence, but unfortunately, it introduces a fundamental problem.
+
+Let's go through it.
+
+1. Your precedence function is incorrect
+You currently have:
+
+
+c
+if(x=='^') return 5;
+else if(x=='*') return 4;
+else if(x=='/') return 3;
+else if(x=='+') return 2;
+else if(x=='-') return 1;
+But operators have precedence groups:
+
+Operators
+
+Precedence
+
+^
+
+3
+
+*, /
+
+2
+
++, -
+
+1
+
+For example, * and / have equal precedence. Their order is determined by associativity, not by assigning different precedence values.
+
+2. Your operator-processing condition
+You still have:
+
+
+c
+while(prec(is[i])<prec(peek()))
+You need to account for two situations:
+
+Incoming operator has lower precedence: pop.
+
+Incoming operator has equal precedence and is left-associative: pop.
+
+But for ^, equal precedence should NOT cause a pop because exponentiation is right-associative.
+
+Also, stop popping when you reach (.
+
+3. Your stack overflow condition is still incorrect
+Change:
+
+
+c
+if(top==(max-1))
+to:
+
+
+c
+if(top==max)
+Since top represents the next available position.
+
+4. Missing postfix null termination
+After your conversion loop, add:
+
+
+c
+ps[j]='\0';
+This ensures your postfix expression is a valid C string.
+
+Let's test your understanding
+Consider these three expressions.
+
+1. A/B*C
+
+
+AB/C*
+
+ABC/*
+
+ABC*/
+
+2. A+B-C
+
+
+ABC-+
+
+AB+C-
+
+ABC+-
+
+3. A^B^C
+
+
+AB^C^
+
+ABC^^
+
+ABC^ ^
+
+My suggestion: Don't move on to another topic just yet. Get the associativity and precedence conditions right, and you'll have a solid infix-to-postfix implementation.
+
+
+tell me what i should fix in it
+
+You only need to make 5 specific changes to your current program. I'll show you exactly what to replace.
+
+1. Fix your push() overflow condition
+Replace:
+
+
+c
+if(top==(max-1))
+With:
+
+
+c
+if(top==max)
+2. Fix your prec() function
+Replace your entire function with:
+
+
+c
+int prec(char x)
+{
+    if(x=='^')
+        return 3;
+    else if(x=='*' || x=='/')
+        return 2;
+    else if(x=='+' || x=='-')
+        return 1;
+    else
+        return 0;
+}
+Operators with equal precedence must have equal values.
+
+3. Fix your operator-processing condition
+Replace:
+
+
+c
+while(prec(is[i])<prec(peek()))
+{
+    ps[j++]=pop();
+}
+With:
+
+
+c
+while(peek()!='(' &&
+      (prec(is[i])<prec(peek()) ||
+      (prec(is[i])==prec(peek()) && is[i]!='^')))
+{
+    ps[j++]=pop();
+}
+push(is[i]);
+This handles:
+
+Higher precedence operators.
+
+Lower precedence operators.
+
+Equal precedence for left-associative operators.
+
+Right-associative exponentiation.
+
+Opening parentheses.
+
+4. Fix your final stack-emptying loop
+Replace:
+
+
+c
+while(peek()!='#')
+{
+    ps[j++]=pop();
+}
+With:
+
+
+c
+while(peek()!='#')
+{
+    ps[j++]=pop();
+}
+This part is already correct, provided your parentheses are balanced.
+
+5. Add the null terminator
+Immediately after the final stack-emptying loop, add:
+
+
+c
+ps[j]='\0';
+One important note
+Your current program uses:
+
+
+c
+stack[top++]='#';
+That's fine with your current top = 0 convention.
+
+However, your stack has a capacity of 10, so it can hold only 9 additional elements after #.
+
+For now, these five changes should get your implementation working for valid expressions containing single-character operands and balanced parentheses.
+
+Make these changes yourself and test:
+
+A+B*C
+
+A-B+C
+
+A^B^C
+
+(A+B)*C
+
+A/B*C
+
+Send me your updated code and we'll test it.
+
+
+#include <stdio.h>
+#include <ctype.h>
+char stack[10];
+int top=0;
+int max=10;
+void push(char x)
+{
+    if(top==(max))
+    {
+        printf("Stack overflow");
+    }
+    else
+    {
+        stack[top++]=x;
+    }
+}
+char pop()
+{
+    if(top==0)
+    {
+        printf("Stack underflow");
+        return 0;
+    }
+    else
+    {
+        char x=stack[--top];
+        return x;
+    }
+}
+int peek()
+{
+    return stack[top-1];
+}
+int prec(char x)
+{
+    if(x=='^')
+    {
+        return 3;
+    }
+    else if(x=='*' || x=='/') 
+    {
+        return 2;
+    }
+    else if(x=='+' || x=='-')
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+int main()
+{
+    stack[top++]='#';
+    int n=0,i=0,j=0;
+    printf("Enter length of string: ");
+    scanf("%d",&n);
+    char is[n+1];
+    char ps[n+1];
+    is[n]='\0';
+    ps[n]='\0';
+    printf("Enter string: ");
+    scanf("%s",is);
+    for(i=0;i<n;i++)
+    {
+        if(isalnum(is[i]))
+        {
+            ps[j++]=is[i];
+        }
+        else if(is[i]=='(')
+        {
+            push(is[i]);
+        }
+        else if(is[i]==')')
+        {
+            while(1)
+            {
+                char x=pop();
+                if(x=='(')
+                {
+                    break;
+                }
+                else
+                {
+                    ps[j++]=x;
+                }
+            }
+        }
+        else
+        {
+            while(peek()!='(' && (prec(is[i])<prec(peek())) || (prec(is[i])==prec(peek()) && is[i]!='^'))
+            {
+                ps[j++]=pop();
+            }
+            push(is[i]);
+        }
+    }
+    while(peek()!='#')
+    {
+        ps[j++]=pop();
+    }
+    ps[j]='\0';
+    printf("Postfix expression: ");
+    printf("%s",ps);
+    for(i=0;i<n;i++)
+    {
+        if(isalnum(ps[i]))
+        {
+            push(ps[i]);
+        }
+        else
+        {
+            int x=pop();
+            int y=pop();
+            int z=0;
+            if(ps[i]=='+')
+            {
+                z=x+y;
+            }else if(ps[i]=='-')
+            {
+                z=x-y;
+            }else if(ps[i]=='*')
+            {
+                z=x*y;
+            }else if(ps[i]=='/')
+            {
+                if(y==0)
+                {
+                    z=y/x;
+                }
+                else
+                {
+                    z=x/y;
+                }
+            }
+            else
+            {
+                z=x^y;
+            }
+            push(z);
+        }
+    }
+    int a=pop();
+    printf("Result: %d",a);
+    return 0;
+}
+
+You're now going one step further: infix to postfix conversion AND postfix evaluation. Excellent progress!
+
+Your conversion logic is almost there, but I found a few important bugs. Your postfix evaluation section also needs some corrections.
+
+Let's tackle them separately.
+
+1. Operator precedence condition — missing parentheses
+You wrote:
+
+
+c
+while(peek()!='(' && (prec(is[i])<prec(peek())) || (prec(is[i])==prec(peek()) && is[i]!='^'))
+Because of operator precedence in C, && is evaluated before ||.
+
+This means your opening-parenthesis check doesn't protect the second condition.
+
+Change it to:
+
+
+c
+while(peek()!='(' &&
+      (prec(is[i])<prec(peek()) ||
+      (prec(is[i])==prec(peek()) && is[i]!='^')))
+This is important!
+
+2. Postfix evaluation: You're using a character stack
+You declared:
+
+
+c
+char stack[10];
+This works for storing characters during infix-to-postfix conversion.
+
+But now you're evaluating postfix expressions containing numerical values.
+
+For example:
+
+
+text
+23+
+Your evaluation stack should store integers, not characters.
+
+Solution: Use a separate integer stack.
+
+
+c
+int evalStack[10];
+int etop=-1;
+Create separate pushEval(), popEval() and peekEval() functions, or implement the operations directly.
+
+3. Your operand order is incorrect for subtraction and division
+You wrote:
+
+
+c
+int x=pop();
+int y=pop();
+This is actually fine, provided you remember:
+
+x is the right operand.
+
+y is the left operand.
+
+Therefore, subtraction should be:
+
+
+c
+z=y-x;
+Division should be:
+
+
+c
+z=y/x;
+Multiplication and addition work either way.
+
+4. Your division-by-zero condition is reversed
+You wrote:
+
+
+c
+if(y==0)
+{
+    z=y/x;
+}
+else
+{
+    z=x/y;
+}
+You need to check whether the divisor (x) is zero.
+
+The correct logic is:
+
+
+c
+if(x==0)
+{
+    printf("Division by zero");
+    return 1;
+}
+else
+{
+    z=y/x;
+}
+5. Your exponentiation operator is incorrect
+You wrote:
+
+
+c
+z=x^y;
+In C, ^ means bitwise XOR, NOT exponentiation!
+
+For integer exponentiation, you can use:
+
+
+c
+#include <math.h>
+z=(int)pow(y,x);
+Remember that y is the left operand and x is the right operand.
+
+6. Your postfix evaluation loop has a small problem
+You wrote:
+
+
+c
+for(i=0;i<n;i++)
+Your postfix expression might be shorter than the original infix expression because parentheses disappear.
+
+Instead, use the actual postfix length:
+
+
+c
+for(i=0;ps[i]!='\0';i++)
+7. One more important conceptual issue
+Your current code treats every alphanumeric character as an operand:
+
+
+c
+if(isalnum(ps[i]))
+{
+    push(ps[i]);
+}
+This is fine for infix-to-postfix conversion.
+
+But for evaluation, it means you're pushing individual characters.
+
+For example, if the postfix expression is:
+
+
+text
+23+
+You need to convert '2' into integer 2 and '3' into integer 3.
+
+You can do that using:
+
+
+c
+int value=ps[i]-'0';
+This approach supports single-digit operands. Multi-digit numbers require additional parsing.
+
+Your next task
+I don't want to give you the entire corrected program because you're learning these concepts by implementing them yourself.
+
+Fix the issues above and send me your next version.
+
+Before that, answer these two questions:
+
+For postfix expression 82-, when you pop the two operands, which one is the left operand and which one is the right operand?
+
+Why do we need a separate integer stack for postfix evaluation instead of reusing your character stack?
+
+These two concepts are particularly important for understanding stack-based expression evaluation.
+
+
+#include <stdio.h>
+#include <ctype.h>
+char stack[10];
+int top=0;
+int max=10;
+void push(char x)
+{
+    if(top==(max))
+    {
+        printf("Stack overflow");
+    }
+    else
+    {
+        stack[top++]=x;
+    }
+}
+char pop()
+{
+    if(top==0)
+    {
+        printf("Stack underflow");
+        return 0;
+    }
+    else
+    {
+        char x=stack[--top];
+        return x;
+    }
+}
+int peek()
+{
+    return stack[top-1];
+}
+int estack[10];
+int etop=0;
+int emax=10;
+void epush(int x)
+{
+    if(etop==(emax))
+    {
+        printf("Stack overflow");
+    }
+    else
+    {
+        estack[etop++]=x;
+    }
+}
+char epop()
+{
+    if(etop==0)
+    {
+        printf("Stack underflow");
+        return 0;
+    }
+    else
+    {
+        int x=estack[--etop];
+        return x;
+    }
+}
+int epeek()
+{
+    return estack[etop-1];
+}
+int prec(char x)
+{
+    if(x=='^')
+    {
+        return 3;
+    }
+    else if(x=='*' || x=='/') 
+    {
+        return 2;
+    }
+    else if(x=='+' || x=='-')
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+int main()
+{
+    stack[top++]='#';
+    int n=0,i=0,j=0;
+    printf("Enter length of string: ");
+    scanf("%d",&n);
+    char is[n+1];
+    char ps[n+1];
+    is[n]='\0';
+    ps[n]='\0';
+    printf("Enter string: ");
+    scanf("%s",is);
+    for(i=0;i<n;i++)
+    {
+        if(isalnum(is[i]))
+        {
+            ps[j++]=is[i];
+        }
+        else if(is[i]=='(')
+        {
+            push(is[i]);
+        }
+        else if(is[i]==')')
+        {
+            while(1)
+            {
+                char x=pop();
+                if(x=='(')
+                {
+                    break;
+                }
+                else
+                {
+                    ps[j++]=x;
+                }
+            }
+        }
+        else
+        {
+            while((peek()!='(' && (prec(is[i])<prec(peek()))) || (prec(is[i])==prec(peek()) && is[i]!='^'))
+            {
+                ps[j++]=pop();
+            }
+            push(is[i]);
+        }
+    }
+    while(peek()!='#')
+    {
+        ps[j++]=pop();
+    }
+    ps[j]='\0';
+    printf("Postfix expression: ");
+    printf("%s",ps);
+    for(i=0;ps[i]!='\0';i++)
+    {
+        if(isalnum(ps[i]))
+        {
+            epush(ps[i]);
+        }
+        else
+        {
+            int x=epop();
+            int y=epop();
+            int z=0;
+            if(ps[i]=='+')
+            {
+                z=x+y;
+            }else if(ps[i]=='-')
+            {
+                z=x-y;
+            }else if(ps[i]=='*')
+            {
+                z=x*y;
+            }else if(ps[i]=='/')
+            {
+                if(y==0)
+                {
+                    z=y/x;
+                }
+                else
+                {
+                    z=x/y;
+                }
+            }
+            else
+            {
+                z=1;
+                while(y!=0)
+                {
+                    z=x*z;
+                    y=y-1;
+                }
+            }
+            epush(z);
+        }
+    }
+    int a=epop();
+    printf("Result: %d",a);
+    return 0;
+}
+
+You're making good progress! Your infix-to-postfix conversion and evaluation are now separated into two stacks, which is a good approach.
+
+However, there are 4 important things to fix in your current program.
+
+1. epop() has the wrong return type
+You've declared:
+
+
+c
+char epop()
+But your evaluation stack stores integers.
+
+Change it to:
+
+
+c
+int epop()
+Otherwise, integer results may get truncated when returned.
+
+2. Operand order during evaluation
+This is correct:
+
+
+c
+int x=epop();
+int y=epop();
+But your subtraction is incorrect:
+
+
+c
+z=x-y;
+Remember that the first popped value is the right operand, and the second popped value is the left operand.
+
+Change it to:
+
+
+c
+z=y-x;
+Similarly, division should be:
+
+
+c
+if(x==0)
+{
+    printf("Division by zero");
+    return 1;
+}
+else
+{
+    z=y/x;
+}
+And exponentiation should calculate:
+
+
+c
+z = y^x;
+Your multiplication and addition are already correct.
+
+3. Your exponentiation logic
+You currently have:
+
+
+c
+z=1;
+while(y!=0)
+{
+    z=x*z;
+    y=y-1;
+}
+The logic is fine for positive integer exponents, but you're using the wrong operand.
+
+It should be:
+
+
+c
+z=1;
+while(x!=0)
+{
+    z=z*y;
+    x--;
+}
+This calculates the left operand raised to the right operand.
+
+4. Parentheses and invalid expressions
+Your infix conversion is mostly correct for valid expressions.
+
+However, you should eventually add checks for:
+
+Unmatched opening parentheses.
+
+Unmatched closing parentheses.
+
+Invalid expressions.
+
+Stack underflow during evaluation.
+
+These are important for making your program robust.
+
+One more thing: test your program
+Try this expression:
+
+
+text
+5+3*2
+Expected postfix:
+
+
+text
+532*+
+Expected result:
+
+
+text
+11
+Then try:
+
+
+text
+8-4/2
+Expected postfix:
+
+
+text
+842/-
+Expected result:
+
+
+text
+6
+And finally:
+
+
+text
+(5+3)*2
+Expected postfix:
+
+
+text
+53+2*
+Expected result:
+
+
+text
+16
+One important limitation: Your current implementation treats every alphanumeric character as a single operand. So 12 would be treated as two separate operands, 1 and 2, rather than the number twelve.
+
+For now, single-digit operands are perfectly fine for practising stack-based expression evaluation.
+
+Your next challenge
+Try these without looking at the answers:
+
+9-2*3+4
+
+(8+2)*(6-3)
+
+2^3+4*2
+
+Tell me the postfix expressions and evaluated results. I'll check both your conversion and evaluation.
+
+
+#include <stdio.h>
+#include <ctype.h>
+char stack[10];
+int top=0;
+int max=10;
+void push(char x)
+{
+    if(top==(max))
+    {
+        printf("Stack overflow");
+    }
+    else
+    {
+        stack[top++]=x;
+    }
+}
+char pop()
+{
+    if(top==0)
+    {
+        printf("Stack underflow");
+        return 0;
+    }
+    else
+    {
+        char x=stack[--top];
+        return x;
+    }
+}
+char peek()
+{
+    return stack[top-1];
+}
+int estack[10];
+int etop=0;
+int emax=10;
+void epush(int x)
+{
+    if(etop==(emax))
+    {
+        printf("Stack overflow");
+    }
+    else
+    {
+        estack[etop++]=x;
+    }
+}
+int epop()
+{
+    if(etop==0)
+    {
+        printf("Stack underflow");
+        return 0;
+    }
+    else
+    {
+        int x=estack[--etop];
+        return x;
+    }
+}
+int epeek()
+{
+    return estack[etop-1];
+}
+int prec(char x)
+{
+    if(x=='^')
+    {
+        return 3;
+    }
+    else if(x=='*' || x=='/') 
+    {
+        return 2;
+    }
+    else if(x=='+' || x=='-')
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+int main()
+{
+    stack[top++]='#';
+    int n=0,i=0,j=0;
+    printf("Enter length of string: ");
+    scanf("%d",&n);
+    char is[n+1];
+    char ps[n+1];
+    is[n]='\0';
+    ps[n]='\0';
+    printf("Enter string: ");
+    scanf("%s",is);
+    for(i=0;i<n;i++)
+    {
+        if(isalnum(is[i]))
+        {
+            ps[j++]=is[i];
+        }
+        else if(is[i]=='(')
+        {
+            push(is[i]);
+        }
+        else if(is[i]==')')
+        {
+            while(1)
+            {
+                char x=pop();
+                if(x=='(')
+                {
+                    break;
+                }
+                else
+                {
+                    ps[j++]=x;
+                }
+            }
+        }
+        else
+        {
+            while((peek()!='(' && (prec(is[i])<prec(peek()))) || (prec(is[i])==prec(peek()) && is[i]!='^'))
+            {
+                ps[j++]=pop();
+            }
+            push(is[i]);
+        }
+    }
+    while(peek()!='#')
+    {
+        ps[j++]=pop();
+    }
+    ps[j]='\0';
+    printf("Postfix expression: ");
+    printf("%s",ps);
+    for(i=0;ps[i]!='\0';i++)
+    {
+        if(isalnum(ps[i]))
+        {
+            epush(ps[i]);
+        }
+        else
+        {
+            int x=epop();
+            int y=epop();
+            int z=0;
+            if(ps[i]=='+')
+            {
+                z=x+y;
+            }else if(ps[i]=='-')
+            {
+                z=y-x;
+            }else if(ps[i]=='*')
+            {
+                z=x*y;
+            }else if(ps[i]=='/')
+            {
+                if(x==0)
+                {
+                    z=1;
+                }
+                else
+                {
+                    z=y/x;
+                }
+            }
+            else
+            {
+                z=1;
+                while(y!=0)
+                {
+                    z=z*y;
+                    x--;
+                }
+            }
+            epush(z);
+        }
+    }
+    int a=epop();
+    printf("Result: %d",a);
+    return 0;
+}
+
+Much better! Your operand order for subtraction and division is now correct, and you've fixed the return type of epop().
+
+However, there are still two bugs and a few improvements to make.
+
+1. Exponentiation is still incorrect
+Your current code:
+
+
+c
+z=1;
+while(y!=0)
+{
+    z=z*y;
+    x--;
+}
+There are two mistakes:
+
+You're multiplying by y repeatedly instead of multiplying the base by itself.
+
+You're checking y in the loop condition but decrementing x.
+
+Remember:
+
+y = base
+
+x = exponent
+
+Correct code:
+
+
+c
+z=1;
+while(x!=0)
+{
+    z=z*y;
+    x--;
+}
+For example, 2^3:
+
+Initially, y=2, x=3.
+
+First iteration: z=2
+
+Second iteration: z=4
+
+Third iteration: z=8
+
+2. Your division-by-zero handling
+You wrote:
+
+
+c
+if(x==0)
+{
+    z=1;
+}
+This is incorrect. Division by zero is undefined. You shouldn't assign an arbitrary result.
+
+Instead:
+
+
+c
+if(x==0)
+{
+    printf("Error: Division by zero");
+    return 1;
+}
+else
+{
+    z=y/x;
+}
+3. One improvement in your infix conversion
+Your precedence-handling condition is:
+
+
+c
+while((peek()!='(' && (prec(is[i])<prec(peek()))) || (prec(is[i])==prec(peek()) && is[i]!='^'))
+I'd recommend:
+
+
+c
+while(peek()!='#' && peek()!='(' &&
+      (prec(is[i])<prec(peek()) ||
+      (prec(is[i])==prec(peek()) && is[i]!='^')))
+This explicitly protects the bottom-of-stack marker #.
+
+It also makes your intention clearer.
+
+Note: This handles the usual right-associative behaviour of ^ for simple expressions.
+
+4. Test your program
+Try these expressions:
+
+Infix
+
+Expected postfix
+
+Result
+
+5+3*2
+
+532*+
+
+11
+
+8-4/2
+
+842/-
+
+6
+
+(5+3)*2
+
+53+2*
+
+16
+
+2^3+4
+
+23^4+
+
+12
+
+9-2*3+4
+
+923* -4+
+
+7
+
+For the last expression, ignore the space in the postfix representation.
+
+My next question for you
+There's something important I want you to understand before we move on.
+
+In your evaluation loop, you have:
+
+
+c
+if(isalnum(ps[i]))
+{
+    epush(ps[i]);
+}
+Suppose the postfix expression contains the character '5'.
+
+Are you pushing the integer 5 onto the stack, or are you pushing the ASCII value of the character '5'?
+
+Think about this one. It's an important C programming concept!
+
+
+#include <stdio.h>
+#include <ctype.h>
+char stack[10];
+int top=0;
+int max=10;
+void push(char x)
+{
+    if(top==(max))
+    {
+        printf("Stack overflow");
+    }
+    else
+    {
+        stack[top++]=x;
+    }
+}
+char pop()
+{
+    if(top==0)
+    {
+        printf("Stack underflow");
+        return 0;
+    }
+    else
+    {
+        char x=stack[--top];
+        return x;
+    }
+}
+char peek()
+{
+    return stack[top-1];
+}
+int estack[10];
+int etop=0;
+int emax=10;
+void epush(int x)
+{
+    if(etop==(emax))
+    {
+        printf("Stack overflow");
+    }
+    else
+    {
+        estack[etop++]=x;
+    }
+}
+int epop()
+{
+    if(etop==0)
+    {
+        printf("Stack underflow");
+        return 0;
+    }
+    else
+    {
+        int x=estack[--etop];
+        return x;
+    }
+}
+int epeek()
+{
+    return estack[etop-1];
+}
+int prec(char x)
+{
+    if(x=='^')
+    {
+        return 3;
+    }
+    else if(x=='*' || x=='/') 
+    {
+        return 2;
+    }
+    else if(x=='+' || x=='-')
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+int main()
+{
+    stack[top++]='#';
+    int n=0,i=0,j=0;
+    printf("Enter length of string: ");
+    scanf("%d",&n);
+    char is[n+1];
+    char ps[n+1];
+    is[n]='\0';
+    ps[n]='\0';
+    printf("Enter string: ");
+    scanf("%s",is);
+    for(i=0;i<n;i++)
+    {
+        if(isalnum(is[i]))
+        {
+            ps[j++]=is[i];
+        }
+        else if(is[i]=='(')
+        {
+            push(is[i]);
+        }
+        else if(is[i]==')')
+        {
+            while(1)
+            {
+                char x=pop();
+                if(x=='(')
+                {
+                    break;
+                }
+                else
+                {
+                    ps[j++]=x;
+                }
+            }
+        }
+        else
+        {
+            while((peek()!='(' && (prec(is[i])<prec(peek()))) || (prec(is[i])==prec(peek()) && is[i]!='^'))
+            {
+                ps[j++]=pop();
+            }
+            push(is[i]);
+        }
+    }
+    while(peek()!='#')
+    {
+        ps[j++]=pop();
+    }
+    ps[j]='\0';
+    printf("Postfix expression: ");
+    printf("%s",ps);
+    for(i=0;ps[i]!='\0';i++)
+    {
+        if(isalnum(ps[i]))
+        {
+            epush(ps[i]);
+        }
+        else
+        {
+            int x=epop();
+            int y=epop();
+            int z=0;
+            if(ps[i]=='+')
+            {
+                z=x+y;
+            }else if(ps[i]=='-')
+            {
+                z=y-x;
+            }else if(ps[i]=='*')
+            {
+                z=x*y;
+            }else if(ps[i]=='/')
+            {
+                if(x==0)
+                {
+                    z=1;
+                }
+                else
+                {
+                    z=y/x;
+                }
+            }
+            else
+            {
+                z=1;
+                while(x!=0)
+                {
+                    z=z*y;
+                    x--;
+                }
+            }
+            epush(z);
+        }
+    }
+    int a=epop();
+    printf("Result: %d",a);
+    return 0;
+}
+
+You're very close! Your exponentiation logic is now correct for positive integer exponents.
+
+But there's one fundamental mistake that will make your evaluation produce incorrect results.
+
+1. ASCII value vs integer value
+You currently have:
+
+
+c
+if(isalnum(ps[i]))
+{
+    epush(ps[i]);
+}
+Suppose ps[i] is '5'.
+
+You're pushing the ASCII value of '5', which is 53, not the integer 5.
+
+Fix it using:
+
+
+c
+epush(ps[i]-'0');
+Why does this work?
+
+ASCII value of '5' = 53
+
+ASCII value of '0' = 48
+
+53 - 48 = 5
+
+This works for single-digit numbers.
+
+2. Division by zero is still unresolved
+You still have:
+
+
+c
+if(x==0)
+{
+    z=1;
+}
+Replace this with an error message and terminate evaluation.
+
+
+c
+if(x==0)
+{
+    printf("Error: Division by zero");
+    return 1;
+}
+3. Improve your infix conversion condition
+You haven't incorporated the peek()!='#' check I suggested.
+
+Use:
+
+
+c
+while(peek()!='#' && peek()!='(' &&
+      (prec(is[i])<prec(peek()) ||
+      (prec(is[i])==prec(peek()) && is[i]!='^')))
+This makes the condition safer.
+
+4. One important test
+Try:
+
+
+text
+Infix:  5+3*2-4
+You should get:
+
+Postfix
+
+532*+4-
+Evaluation
+
+7
+5. Your next challenge
+Before we move on, I want you to answer this:
+
+Suppose you have the postfix expression:
+
+
+text
+82-4*
+When evaluating the - operator:
+
+Which value gets popped first?
+
+Which value gets popped second?
+
+What subtraction should be performed?
+
+Don't change your code yet. I want to make sure you've understood the stack's LIFO behaviour and operand ordering.
+
+
+#include <stdio.h>
+    #include <ctype.h>
+    char stack[10];
+    int top=0;
+    int max=10;
+    void push(char x)
+    {
+        if(top==(max))
+        {
+            printf("Stack overflow");
+        }
+        else
+        {
+            stack[top++]=x;
+        }
+    }
+    char pop()
+    {
+        if(top==0)
+        {
+            printf("Stack underflow");
+            return 0;
+        }
+        else
+        {
+            char x=stack[--top];
+            return x;
+        }
+    }
+    char peek()
+    {
+        return stack[top-1];
+    }
+    int estack[10];
+    int etop=0;
+    int emax=10;
+    void epush(int x)
+    {
+        if(etop==(emax))
+        {
+            printf("Stack overflow");
+        }
+        else
+        {
+            estack[etop++]=x;
+        }
+    }
+    int epop()
+    {
+        if(etop==0)
+        {
+            printf("Stack underflow");
+            return 0;
+        }
+        else
+        {
+            int x=estack[--etop];
+            return x;
+        }
+    }
+    int epeek()
+    {
+        return estack[etop-1];
+    }
+    int prec(char x)
+    {
+        if(x=='^')
+        {
+            return 3;
+        }
+        else if(x=='*' || x=='/') 
+        {
+            return 2;
+        }
+        else if(x=='+' || x=='-')
+        {
+            return 1;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+    int main()
+    {
+        stack[top++]='#';
+        int n=0,i=0,j=0;
+        printf("Enter length of string: ");
+        scanf("%d",&n);
+        char is[n+1];
+        char ps[n+1];
+        is[n]='\0';
+        ps[n]='\0';
+        printf("Enter string: ");
+        scanf("%s",is);
+        for(i=0;i<n;i++)
+        {
+            if(isalnum(is[i]))
+            {
+                ps[j++]=is[i];
+            }
+            else if(is[i]=='(')
+            {
+                push(is[i]);
+            }
+            else if(is[i]==')')
+            {
+                while(1)
+                {
+                    char x=pop();
+                    if(x=='(')
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        ps[j++]=x;
+                    }
+                }
+            }
+            else
+            {
+                while(peek()!='#' && peek()!='(' && (prec(is[i])<prec(peek()) || (prec(is[i])==prec(peek()) && is[i]!='^')))
+                {
+                    ps[j++]=pop();
+                }
+                push(is[i]);
+            }
+        }
+        while(peek()!='#')
+        {
+            ps[j++]=pop();
+        }
+        ps[j]='\0';
+        printf("Postfix expression: ");
+        printf("%s",ps);
+        for(i=0;ps[i]!='\0';i++)
+        {
+            if(isalnum(ps[i]))
+            {
+                epush(ps[i]-'0');
+            }
+            else
+            {
+                int x=epop();
+                int y=epop();
+                int z=0;
+                if(ps[i]=='+')
+                {
+                    z=x+y;
+                }else if(ps[i]=='-')
+                {
+                    z=y-x;
+                }else if(ps[i]=='*')
+                {
+                    z=x*y;
+                }else if(ps[i]=='/')
+                {
+                    if(x==0)
+                    {
+                        z=1;
+                    }
+                    else
+                    {
+                        z=y/x;
+                    }
+                }
+                else
+                {
+                    z=1;
+                    while(x!=0)
+                    {
+                        z=z*y;
+                        x--;
+                    }
+                }
+                epush(z);
+            }
+        }
+        int a=epop();
+        printf("Result: %d",a);
+        return 0;
+    }
+
+Excellent! This version is significantly better. You've fixed:
+
+Character-to-integer conversion using ps[i]-'0'.
+
+Operand ordering for subtraction and division.
+
+Exponentiation for positive integer exponents.
+
+Operator precedence and associativity.
+
+Protection against popping past # during operator handling.
+
+Your infix-to-postfix conversion and postfix evaluation are now fundamentally correct for valid expressions with single-digit, non-negative operands.
+
+There are just a few remaining issues.
+
+1. Division by zero
+You still have:
+
+
+c
+if(x==0)
+{
+    z=1;
+}
+Replace it with:
+
+
+c
+if(x==0)
+{
+    printf("Error: Division by zero");
+    return 1;
+}
+2. Parentheses handling
+Your closing-parenthesis loop:
+
+
+c
+while(1)
+{
+    char x=pop();
+    if(x=='(')
+    {
+        break;
+    }
+    else
+    {
+        ps[j++]=x;
+    }
+}
+Works for valid expressions.
+
+However, if the user enters mismatched parentheses, you could pop the # marker or access an invalid stack position.
+
+You can add validation later.
+
+3. Check whether the evaluation stack has exactly one element
+After evaluating the postfix expression, you do:
+
+
+c
+int a=epop();
+Ideally, before doing this, check:
+
+
+c
+if(etop!=1)
+{
+    printf("Invalid expression");
+    return 1;
+}
+This helps detect malformed expressions.
+
+4. Important limitation
+Your program currently supports:
+
+Single-digit operands.
+
+Addition, subtraction, multiplication and division.
+
+Exponentiation.
+
+Parentheses.
+
+Operator precedence.
+
+It doesn't yet support multi-digit numbers or unary minus.
+
+That's perfectly fine for your current learning stage.
+
+Let's test your understanding
+Evaluate these three expressions manually:
+
+Infix expression
+
+Expected result
+
+9-2*3+4
+
+7
+
+(8+2)*(6-3)
+
+30
+
+2^3+4*2
+
+16
+
+Give me their postfix expressions too.
+
+Once you get these right, I'd consider your basic stack-based infix-to-postfix conversion and postfix evaluation complete.
+
+Then we can move to the next data structures and algorithms topic.
+
+
+stack using queue and queue using stack
+
+Perfect! Next, let's study implementing a Stack using Queues and a Queue using Stacks.
+
+These are classic applications of stacks and queues, and they're commonly asked in data structures exams.
+
+We'll do them one at a time, just like we did with infix-to-postfix conversion.
+
+1. Implement Stack using Queues
+First, remember the difference:
+
+Stack: LIFO (Last In, First Out).
+
+Queue: FIFO (First In, First Out).
+
+Our objective is to implement stack operations using queues.
+
+Required operations:
+
+push(x) – Insert an element.
+
+pop() – Remove the most recently inserted element.
+
+peek() – Return the top element.
+
+データ構造とは？身近な使用例も併せて解説｜From
+ 
+There are two approaches:
+
+Using two queues.
+
+Using one queue.
+
+We'll start with two queues because the logic is easier to understand.
+
+Your first question
+Suppose we have two queues, Q1 and Q2.
+
+We perform:
+
+
+text
+push(10)
+push(20)
+push(30)
+Since we are implementing a stack, what should pop() return?
+
+And more importantly, how would you rearrange the elements in the two queues to make that happen?
+
+Think about it before coding. I'll guide you through the logic.
+
+
+no, just explain the complete logic of both to me
+
+Let's cover both completely, including the logic, algorithms, examples, and C implementation approaches.
+
+There are four combinations to understand:
+
+Stack using two queues.
+
+Stack using one queue.
+
+Queue using two stacks.
+
+Queue using one stack (with recursion).
+
+The first three are the most important to learn.
+
+Part 1: Stack using Queues
+Remember: A stack follows LIFO, whereas a queue follows FIFO.
+
+Our objective is to make queues behave like a stack.
+
+Method 1: Using two queues (Q1 and Q2)
+We'll make push() costly and pop() easy.
+
+Logic:
+
+Whenever we insert a new element:
+
+Insert the new element into Q2.
+
+Transfer all elements from Q1 into Q2.
+
+Swap the names/references of Q1 and Q2.
+
+This ensures that the newest element is always at the front of Q1.
+
+Example
+Initially:
+
+push(10)
+
+Q1
+10 (front)
+push(20)
+
+Q1
+20 (front)
+10
+push(30)
+
+Q1
+30 (front)
+20
+10
+pop()
+
+Removed
+30
+
+Remaining queue: 20, 10
+
+Notice that the newest element is always at the front.
+
+Pseudocode
+
+text
+PUSH(x):
+    enqueue(Q2, x)
+
+    while Q1 is not empty:
+        enqueue(Q2, dequeue(Q1))
+
+    swap(Q1, Q2)
+
+
+POP():
+    if Q1 is empty:
+        print "Stack Underflow"
+    else:
+        return dequeue(Q1)
+Time complexity
+Operation
+
+Complexity
+
+Push
+
+O(n)
+
+Pop
+
+O(1)
+
+Peek
+
+O(1)
+
+Method 2: Using one queue
+Here, we'll make push() costly again.
+
+Logic:
+
+Store the current number of elements in the queue.
+
+Enqueue the new element.
+
+Rotate all the previously existing elements from the front to the rear.
+
+This brings the newly inserted element to the front.
+
+Example
+Suppose the queue contains:
+
+10, 20
+
+Now perform push(30).
+
+Enqueue 30: 10, 20, 30
+
+Rotate 10: 20, 30, 10
+
+Rotate 20: 30, 10, 20
+
+Now 30 is at the front!
+
+Therefore, pop() removes 30.
+
+Pseudocode
+
+text
+PUSH(x):
+    n = size(Q)
+
+    enqueue(Q, x)
+
+    repeat n times:
+        enqueue(Q, dequeue(Q))
+
+
+POP():
+    if Q is empty:
+        print "Stack Underflow"
+    else:
+        return dequeue(Q)
+Time complexity
+Operation
+
+Complexity
+
+Push
+
+O(n)
+
+Pop
+
+O(1)
+
+Peek
+
+O(1)
+
+Part 2: Queue using Stacks
+Now we'll reverse the problem.
+
+We want to implement a FIFO queue using LIFO stacks.
+
+Method 1: Using two stacks (S1 and S2)
+This is particularly important because it gives us an efficient queue implementation.
+
+We'll make use of two stacks:
+
+S1: Used for incoming elements.
+
+S2: Used for outgoing elements.
+
+Logic:
+
+Enqueue(x)
+Simply push the new element into S1.
+
+Dequeue()
+If S2 is not empty, pop from S2.
+
+If S2 is empty, transfer all elements from S1 into S2 by repeatedly popping from S1 and pushing into S2.
+
+Pop the top element from S2.
+
+Why does this work?
+
+Because transferring elements from one stack to another reverses their order.
+
+Example
+Perform:
+
+
+text
+enqueue(10)
+enqueue(20)
+enqueue(30)
+Before dequeue
+
+S1
+30
+
+20
+
+10
+
+Bottom
+S2
+Empty
+Transfer S1 → S2
+
+S1
+Empty
+S2
+10 ← Top
+
+20
+
+30
+
+Bottom
+dequeue() returns 10
+
+The next dequeue returns 20, and the next returns 30.
+
+Pseudocode
+
+text
+ENQUEUE(x):
+    push(S1, x)
+
+
+DEQUEUE():
+    if S2 is empty:
+        while S1 is not empty:
+            push(S2, pop(S1))
+
+    if S2 is empty:
+        print "Queue Underflow"
+    else:
+        return pop(S2)
+Time complexity
+Operation
+
+Complexity
+
+Enqueue
+
+O(1)
+
+Dequeue
+
+O(1) amortized
+
+Peek
+
+O(1) amortized
+
+Important: A single dequeue can take O(n) when transferring elements, but over many operations, the amortized complexity is O(1).
+
+Method 2: Using one stack (recursion)
+This is another interesting implementation.
+
+We use recursion to simulate a second stack.
+
+Logic
+Enqueue(x):
+
+Simply push x onto the stack.
+
+Dequeue():
+
+Pop the top element.
+
+If the stack becomes empty, return that element.
+
+Otherwise, recursively call dequeue().
+
+After recursion returns, push the popped element back.
+
+This removes the bottom-most element, which represents the oldest queue element.
+
+Example
+Stack initially:
+
+
+text
+Top → 30
+       20
+       10
+Call dequeue():
+
+Pop 30.
+
+Pop 20.
+
+Pop 10.
+
+Stack becomes empty.
+
+Return 10.
+
+Push 20 back.
+
+Push 30 back.
+
+Final stack:
+
+
+text
+Top → 30
+       20
+       10
+The value returned is 10, exactly as a queue should behave.
+
+C implementation
+
+c
+int dequeue()
+{
+    int x = pop();
+
+    if(top == 0)
+    {
+        return x;
+    }
+
+    int result = dequeue();
+
+    push(x);
+
+    return result;
+}
+This assumes pop() and push() are already implemented correctly and the queue is nonempty.
+
+Time complexity
+Operation
+
+Complexity
+
+Enqueue
+
+O(1)
+
+Dequeue
+
+O(n)
+
+Part 3: Complete comparison
+This table is useful for revision and exams.
+
+Implementation
+
+Insert
+
+Remove
+
+Stack using 2 queues
+
+O(n)
+
+O(1)
+
+Stack using 1 queue
+
+O(n)
+
+O(1)
+
+Queue using 2 stacks
+
+O(1)
+
+O(1) amortized
+
+Queue using 1 stack + recursion
+
+O(1)
+
+O(n)
+
+Part 4: What you should remember
+Stack using queues
+
+Make the newest element come to the front of the queue.
+
+Queue using two stacks
+
+Transfer elements between stacks to reverse their order. This gives FIFO behaviour.
+
+Queue using one stack
+
+Use recursion to reach and remove the bottom-most element.
+
+Part 5: Practice questions
+Before implementing these in C, try answering these questions.
+
+Quick knowledge check
+
+0/4 answered
+1. In a stack implemented using two queues, which element should always be at the front of Q1?
+
+
+The oldest element
+
+The newest element
+
+The smallest element
+
+The largest element
+2. In a queue implemented using two stacks, when should we transfer S1 into S2?
+
+
+Every enqueue
+
+Whenever S1 is full
+
+Only when S2 is empty
+
+Whenever S2 is full
+3. What is the time complexity of dequeue using one stack and recursion?
+
+
+O(1)
+
+O(log n)
+
+O(n)
+
+O(n²)
+4. Why does transferring elements from S1 to S2 reverse their order?
+
+
+Because stacks use FIFO
+
+Because each pop removes the most recently pushed element
+
+Because enqueue sorts the elements
+
+Because recursion reverses them
+My recommendation: Understand all four approaches, but prioritize implementing stack using two queues and queue using two stacks in C. Those are especially useful interview and examination problems.
+
+
+ChatGPT is AI and can make mistakes.
+
+New chat
+Images
 Plugins
 See plans and pricing
 Help
